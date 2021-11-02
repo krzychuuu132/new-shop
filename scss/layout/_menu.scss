@@ -1,0 +1,131 @@
+.nav {
+  .menu {
+    &__logo {
+      height: 6rem;
+      padding: 0rem 4rem;
+
+      a {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      img {
+        display: block;
+        padding: 1rem 0;
+        margin: 0 auto;
+      }
+    }
+    &__navbar {
+      background-color: $gray;
+      height: 15rem;
+
+      &-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+      }
+    }
+    &__hamburger {
+      border: none;
+      width: 2.3rem;
+      height: 1.9rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-end;
+      cursor: pointer;
+      &-item,
+      &::before,
+      &::after {
+        display: block;
+        width: 100%;
+        height: 0.3rem;
+        background-color: $text-color;
+      }
+
+      &::before,
+      &::after {
+        content: "";
+      }
+    }
+
+    &__content {
+      height: calc(100vh - 15rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      transform: translateX(100vw);
+      will-change: transform;
+      @include transition;
+      padding-left: 4rem;
+
+      &--active {
+        transform: translateX(0);
+      }
+    }
+
+    &__list {
+      list-style: none;
+      padding-left: 0;
+
+      &-item {
+        &:nth-last-of-type(1) {
+          .menu__list-link {
+            margin-bottom: 0;
+          }
+        }
+      }
+
+      &-link {
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 1.5rem;
+        font-weight: 500;
+        padding: 0.5rem 0;
+        display: block;
+        position: relative;
+        margin-bottom: 0.8rem;
+
+        &--active {
+          &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 55%;
+            height: 0.2rem;
+            background-color: $primary;
+          }
+        }
+      }
+    }
+
+    &__languages {
+      &-item {
+        background-color: transparent;
+        border: none;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        padding: 0 1rem;
+        margin-top: 1rem;
+
+        &:nth-of-type(1) {
+          padding-left: 0;
+          position: relative;
+
+          &::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 0.2rem;
+            height: 100%;
+            background-color: $text-color;
+          }
+        }
+      }
+    }
+  }
+}
