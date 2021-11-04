@@ -1,5 +1,43 @@
 .nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  z-index: 1;
+  border-bottom: 0.2rem solid $border-color;
+
+  @include media-breakpoint-up(md) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+  }
   .menu {
+    transform: translateX(100vw);
+    will-change: transform;
+    @include transition;
+    background-color: $gray;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 2;
+    overflow-y: auto;
+
+    @include media-breakpoint-up(md) {
+      transform: translateX(0);
+      position: initial;
+      height: initial;
+      width: initial;
+      overflow: initial;
+    }
+
+    &--active {
+      transform: translateX(0);
+    }
+
     &__logo {
       height: 6rem;
       padding: 0rem 4rem;
@@ -15,9 +53,31 @@
         margin: 0 auto;
       }
     }
+
+    &__logo-main {
+      padding: 2rem 0;
+      height: initial;
+      width: fit-content;
+      margin-left: 2rem;
+
+      @include media-breakpoint-up(md) {
+        margin-left: 0;
+      }
+
+      img {
+        max-width: 10rem;
+        margin: initial;
+        padding: 0;
+      }
+    }
+
     &__navbar {
       background-color: $gray;
       height: 15rem;
+
+      @include media-breakpoint-up(md) {
+        display: none;
+      }
 
       &-container {
         display: flex;
@@ -27,6 +87,9 @@
       }
     }
     &__hamburger {
+      position: fixed;
+      right: 2rem;
+      top: 2rem;
       border: none;
       width: 2.3rem;
       height: 1.9rem;
@@ -35,6 +98,11 @@
       justify-content: space-between;
       align-items: flex-end;
       cursor: pointer;
+      z-index: 3;
+      background-color: transparent;
+      @include media-breakpoint-up(md) {
+        display: none;
+      }
       &-item,
       &::before,
       &::after {
@@ -42,11 +110,31 @@
         width: 100%;
         height: 0.3rem;
         background-color: $text-color;
+        transition: opacity 0.4s ease-in-out, 0.5s transform ease-in-out;
+      }
+
+      &-item {
+        will-change: opacity;
       }
 
       &::before,
       &::after {
         content: "";
+        will-change: transform;
+      }
+
+      &--active {
+        span {
+          opacity: 0;
+        }
+
+        &::before {
+          transform: translateY(0.8rem) rotate(45deg);
+        }
+
+        &::after {
+          transform: translateY(-0.8rem) rotate(-45deg);
+        }
       }
     }
 
@@ -54,25 +142,29 @@
       height: calc(100vh - 15rem);
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      transform: translateX(100vw);
-      will-change: transform;
-      @include transition;
-      padding-left: 4rem;
 
-      &--active {
-        transform: translateX(0);
+      @include media-breakpoint-up(md) {
+        height: initial;
       }
     }
 
     &__list {
       list-style: none;
-      padding-left: 0;
+      padding: 0;
+      background-color: white;
+
+      @include media-breakpoint-up(md) {
+        display: flex;
+      }
 
       &-item {
         &:nth-last-of-type(1) {
           .menu__list-link {
             margin-bottom: 0;
+
+            @include media-breakpoint-up(md) {
+              padding-right: 0;
+            }
           }
         }
       }
@@ -81,11 +173,55 @@
         text-decoration: none;
         text-transform: uppercase;
         font-size: 1.5rem;
-        font-weight: 500;
-        padding: 0.5rem 0;
+        font-weight: 600;
         display: block;
         position: relative;
-        margin-bottom: 0.8rem;
+        display: flex;
+        align-items: center;
+        border-bottom: 0.2rem solid $gray;
+
+        @include media-breakpoint-up(md) {
+          flex-direction: column;
+          padding: 0 2rem;
+        }
+
+        &_icon {
+          padding: 2rem;
+          margin-right: 2rem;
+          display: flex;
+          align-items: center;
+          background-color: $primary;
+
+          @include media-breakpoint-up(md) {
+            padding: 1rem;
+            margin-right: 0;
+            background-color: transparent;
+          }
+
+          img {
+            @include media-breakpoint-up(md) {
+              filter: brightness(0);
+            }
+          }
+
+          img,
+          svg {
+            width: 2.2rem;
+            @include media-breakpoint-up(md) {
+              color: $text-color;
+            }
+          }
+
+          svg {
+            height: 2.2rem;
+
+            path {
+              @include media-breakpoint-up(md) {
+                fill: $text-color;
+              }
+            }
+          }
+        }
 
         &--active {
           &::after {

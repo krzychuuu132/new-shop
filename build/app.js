@@ -77,9 +77,10 @@ var _menu2 = _interopRequireDefault(_menu);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var hamburger = document.querySelector(".menu__hamburger");
-var menuList = document.querySelector(".menu__content");
+var menuList = document.querySelector(".menu");
+var activeClass = "menu--active";
 
-var newMenu = new _menu2.default(hamburger, menuList);
+var newMenu = new _menu2.default(hamburger, menuList, activeClass);
 
 newMenu.openMenu();
 
@@ -99,11 +100,13 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Menu = function () {
-  function Menu(menuBtn, listContainer) {
+  function Menu(menuBtn, listContainer, activeClass) {
     _classCallCheck(this, Menu);
 
     this.hamburger = menuBtn;
     this.menuList = listContainer;
+    this.activeClass = activeClass;
+    this.firstHamburgerClass = this.hamburger.className.split();
   }
 
   _createClass(Menu, [{
@@ -112,7 +115,8 @@ var Menu = function () {
       var _this = this;
 
       this.hamburger.addEventListener("click", function () {
-        _this.menuList.classList.toggle("menu__content--active");
+        _this.menuList.classList.toggle(_this.activeClass);
+        _this.hamburger.classList.toggle(_this.firstHamburgerClass[0] + "--active");
       });
     }
   }]);
