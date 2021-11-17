@@ -30,8 +30,8 @@ const Navbar = () => {
   return (
     <Navigation>
       <LogoMain>
-        <Link href={'#'} prefetch>
-          <StyledLink href={'#'}>
+        <Link href="/" prefetch={false}>
+          <StyledLink>
             <Image src="/images/homepage/main-logo.png" alt="Picture of the author" width={199} height={76} />
           </StyledLink>
         </Link>
@@ -48,7 +48,7 @@ const Navbar = () => {
             </MenuLanguages>
           </MenuNavbarContainer>
           <Logo>
-            <Link href={'/#'} prefetch>
+            <Link href="/" prefetch={false}>
               <StyledLink href={'#'}>
                 <Image src="/images/homepage/main-logo.png" alt="Picture of the author" width={199} height={76} />
               </StyledLink>
