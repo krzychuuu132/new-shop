@@ -1,7 +1,5 @@
-import styled from "styled-components";
-import { minDevice } from "../../../utils/breakpoints";
-import color from "../../../utils/colors";
-import transition from "../../../utils/transitions";
+import styled from 'styled-components';
+import { media } from 'styled-bootstrap-grid';
 
 const Navigation = styled.nav`
   position: fixed;
@@ -10,14 +8,15 @@ const Navigation = styled.nav`
   width: 100%;
   background-color: white;
   z-index: 1;
-  border-bottom: 0.2rem solid $border-color;
+  border-bottom: 0.2rem solid ${({ theme }) => theme.colors.borderColor};
+  overflow-x: hidden;
 
-  @media ${minDevice.md} {
+  ${media.md`
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 2rem;
-  }
+  `}
 `;
 
 const Logo = styled.div`
@@ -42,9 +41,9 @@ const LogoMain = styled.div`
   width: fit-content;
   margin-left: 2rem;
 
-  @media ${minDevice.md} {
+  ${media.md`
     margin-left: 0;
-  }
+  `}
 
   img {
     max-width: 10rem;
@@ -80,29 +79,27 @@ const MenuHamburger = styled.button`
   z-index: 3;
   background-color: transparent;
 
-  @media ${minDevice.md} {
+  ${media.md`
     display: none;
-  }
+  `}
 
   &::before,
   &::after {
     display: block;
     width: 100%;
     height: 0.3rem;
-    background-color: ${color.black};
+    background-color: ${({ theme }) => theme.colors.black};
     transition: opacity 0.4s ease-in-out, 0.5s transform ease-in-out;
-    content: "";
+    content: '';
     will-change: transform;
   }
 
   &::before {
-    transform: ${({ activeMenu }) =>
-      activeMenu ? "translateY(0.8rem) rotate(45deg)" : "0"};
+    transform: ${({ activeMenu }) => (activeMenu ? 'translateY(0.8rem) rotate(45deg)' : '0')};
   }
 
   &::after {
-    transform: ${({ activeMenu }) =>
-      activeMenu ? "translateY(-0.8rem) rotate(-45deg)" : "0"};
+    transform: ${({ activeMenu }) => (activeMenu ? 'translateY(-0.8rem) rotate(-45deg)' : '0')};
   }
 `;
 
@@ -110,16 +107,15 @@ const MenuHamburgerItem = styled.span`
   display: block;
   width: 100%;
   height: 0.3rem;
-  background-color: ${color.black};
+  background-color: ${({ theme }) => theme.colors.black};
   transition: opacity 0.4s ease-in-out, 0.5s transform ease-in-out;
-  opacity: ${({ activeMenu }) => (activeMenu ? "0" : "1")};
+  opacity: ${({ activeMenu }) => (activeMenu ? '0' : '1')};
 `;
 
 const Menu = styled.div`
-  transform: ${({ activeMenu }) =>
-    activeMenu ? "translateX(0)" : "translateX(100vw)"};
+  transform: ${({ activeMenu }) => (activeMenu ? 'translateX(0)' : 'translateX(105vw)')};
   will-change: transform;
-  background-color: ${color.borderColor};
+  background-color: ${({ theme }) => theme.colors.borderColor};
   position: fixed;
   top: 0;
   left: 0;
@@ -127,24 +123,24 @@ const Menu = styled.div`
   height: 100vh;
   z-index: 2;
   overflow-y: auto;
-  ${transition};
+  transition: ${({ theme }) => theme.transition.primary};
 
-  @media ${minDevice.md} {
+  ${media.md`
     transform: translateX(0);
     position: initial;
     height: initial;
     width: initial;
     overflow: initial;
-  }
+  `}
 `;
 
 const MenuNavbar = styled.div`
   background-color: $gray;
   height: 15rem;
 
-  @media ${minDevice.md} {
+  ${media.md`
     display: none;
-  }
+  `}
 `;
 
 const MenuNavbarContainer = styled.div`
@@ -159,9 +155,9 @@ const MenuContent = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media ${minDevice.md} {
+  ${media.md`
     height: initial;
-  }
+  `}
 `;
 
 const MenuList = styled.ul`
@@ -169,9 +165,9 @@ const MenuList = styled.ul`
   padding: 0;
   background-color: white;
 
-  @media ${minDevice.md} {
+  ${media.md`
     display: flex;
-  }
+  `}
 `;
 
 const MenuListItem = styled.li`
@@ -179,9 +175,9 @@ const MenuListItem = styled.li`
     .menu__list-link {
       margin-bottom: 0;
 
-      @media ${minDevice.md} {
+      ${media.md`
         padding-right: 0;
-      }
+      `}
     }
   }
 `;
@@ -195,12 +191,12 @@ const MenuListLink = styled.a`
   position: relative;
   display: flex;
   align-items: center;
-  border-bottom: 0.2rem solid ${color.borderColor};
+  border-bottom: 0.2rem solid ${({ theme }) => theme.colors.borderColor};
 
-  @media ${minDevice.md} {
+  ${media.md`
     flex-direction: column;
     padding: 0 2rem;
-  }
+  `}
 `;
 
 const MenuListLinkIcon = styled.div`
@@ -208,35 +204,35 @@ const MenuListLinkIcon = styled.div`
   margin-right: 2rem;
   display: flex;
   align-items: center;
-  background-color: ${color.secondary};
+  background-color: ${({ theme }) => theme.colors.secondary};
 
-  @media ${minDevice.md} {
+  ${media.md`
     padding: 1rem;
     margin-right: 0;
     background-color: transparent;
-  }
+  `}
 
   img {
-    @media ${minDevice.md} {
+    ${media.md`
       filter: brightness(0);
-    }
+    `}
   }
 
   img,
   svg {
     width: 2.2rem;
-    @media ${minDevice.md} {
+    ${media.md`
       color: black;
-    }
+    `}
   }
 
   svg {
     height: 2.2rem;
 
     path {
-      @media ${minDevice.md} {
+      ${media.md`
         fill: black;
-      }
+      `}
     }
   }
 `;
@@ -257,13 +253,13 @@ const MenuLanguagesItem = styled.button`
     position: relative;
 
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       right: 0;
       top: 0;
       width: 0.2rem;
       height: 100%;
-      background-color: $text-color;
+      background-color: ${({ theme }) => theme.colors.textColor};
     }
   }
 `;
