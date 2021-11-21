@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { media } from 'styled-bootstrap-grid';
+import { Link } from 'react-router-dom';
 
 const Navigation = styled.nav`
   position: fixed;
@@ -52,7 +53,7 @@ const LogoMain = styled.div`
   }
 `;
 
-const StyledLink = styled.a`
+const StyledLink = styled(Link)`
   display: block;
   width: 100%;
   height: 100%;
@@ -182,7 +183,7 @@ const MenuListItem = styled.li`
   }
 `;
 
-const MenuListLink = styled.a`
+const MenuListLink = styled(Link)`
   text-decoration: none;
   text-transform: uppercase;
   font-size: 1.5rem;
@@ -192,10 +193,12 @@ const MenuListLink = styled.a`
   display: flex;
   align-items: center;
   border-bottom: 0.2rem solid ${({ theme }) => theme.colors.borderColor};
+  color: ${({ theme }) => theme.colors.black};
 
   ${media.md`
     flex-direction: column;
     padding: 0 2rem;
+    border:none;
   `}
 `;
 
@@ -264,22 +267,4 @@ const MenuLanguagesItem = styled.button`
   }
 `;
 
-export {
-  Navigation,
-  Logo,
-  LogoMain,
-  StyledLink,
-  MenuIcon,
-  MenuHamburger,
-  MenuHamburgerItem,
-  Menu,
-  MenuNavbar,
-  MenuNavbarContainer,
-  MenuContent,
-  MenuList,
-  MenuListItem,
-  MenuListLink,
-  MenuListLinkIcon,
-  MenuLanguages,
-  MenuLanguagesItem,
-};
+export { Navigation, Logo, LogoMain, StyledLink, MenuIcon, MenuHamburger, MenuHamburgerItem, Menu, MenuNavbar, MenuNavbarContainer, MenuContent, MenuList, MenuListItem, MenuListLink, MenuListLinkIcon, MenuLanguages, MenuLanguagesItem };
