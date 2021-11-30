@@ -8,15 +8,16 @@ const Navigation = styled.nav`
   left: 0;
   width: 100%;
   background-color: white;
-  z-index: 1;
+  z-index: 2;
   border-bottom: 0.2rem solid ${({ theme }) => theme.colors.borderColor};
   overflow-x: hidden;
+`;
 
+const NavigationWrapper = styled.div`
   ${media.md`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 2rem;
   `}
 `;
 
@@ -40,7 +41,6 @@ const LogoMain = styled.div`
   padding: 2rem 0;
   height: initial;
   width: fit-content;
-  margin-left: 2rem;
 
   ${media.md`
     margin-left: 0;
@@ -50,6 +50,10 @@ const LogoMain = styled.div`
     max-width: 10rem;
     margin: initial;
     padding: 0;
+
+    ${media.md`
+    max-width: 15rem;
+  `}
   }
 `;
 
@@ -67,8 +71,8 @@ const MenuIcon = styled.img`
 
 const MenuHamburger = styled.button`
   position: fixed;
-  right: 2rem;
-  top: 2rem;
+  right: 3rem;
+  top: ${({ activeMenu }) => (activeMenu ? '2rem' : '3rem')};
   border: none;
   width: 2.3rem;
   height: 1.9rem;
@@ -79,6 +83,7 @@ const MenuHamburger = styled.button`
   cursor: pointer;
   z-index: 3;
   background-color: transparent;
+  transition: ${({ theme }) => theme.transition.primary};
 
   ${media.md`
     display: none;
@@ -116,7 +121,6 @@ const MenuHamburgerItem = styled.span`
 const Menu = styled.div`
   transform: ${({ activeMenu }) => (activeMenu ? 'translateX(0)' : 'translateX(105vw)')};
   will-change: transform;
-  background-color: ${({ theme }) => theme.colors.borderColor};
   position: fixed;
   top: 0;
   left: 0;
@@ -136,7 +140,7 @@ const Menu = styled.div`
 `;
 
 const MenuNavbar = styled.div`
-  background-color: $gray;
+  background-color: ${({ theme }) => theme.colors.grayBckgr};
   height: 15rem;
 
   ${media.md`
@@ -192,13 +196,26 @@ const MenuListLink = styled(Link)`
   position: relative;
   display: flex;
   align-items: center;
-  border-bottom: 0.2rem solid ${({ theme }) => theme.colors.borderColor};
+  border-bottom: 0.1rem solid ${({ theme }) => theme.colors.borderColor};
   color: ${({ theme }) => theme.colors.black};
+  transition: 0.3s ease-in;
 
   ${media.md`
     flex-direction: column;
     padding: 0 2rem;
     border:none;
+
+    &:hover{
+      color: ${({ theme }) => theme.colors.primary};
+    }
+
+    &:hover svg path{
+      fill: ${({ theme }) => theme.colors.primary}
+    } 
+    
+    &:hover img{
+      fill: ${({ theme }) => theme.colors.primary}
+    } 
   `}
 `;
 
@@ -207,7 +224,7 @@ const MenuListLinkIcon = styled.div`
   margin-right: 2rem;
   display: flex;
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.secondary};
+  background-color: ${({ theme }) => theme.colors.primary};
 
   ${media.md`
     padding: 1rem;
@@ -233,6 +250,7 @@ const MenuListLinkIcon = styled.div`
     height: 2.2rem;
 
     path {
+      transition: 0.3s ease-in;
       ${media.md`
         fill: black;
       `}
@@ -267,4 +285,23 @@ const MenuLanguagesItem = styled.button`
   }
 `;
 
-export { Navigation, Logo, LogoMain, StyledLink, MenuIcon, MenuHamburger, MenuHamburgerItem, Menu, MenuNavbar, MenuNavbarContainer, MenuContent, MenuList, MenuListItem, MenuListLink, MenuListLinkIcon, MenuLanguages, MenuLanguagesItem };
+export {
+  Navigation,
+  Logo,
+  LogoMain,
+  StyledLink,
+  MenuIcon,
+  MenuHamburger,
+  MenuHamburgerItem,
+  Menu,
+  MenuNavbar,
+  MenuNavbarContainer,
+  MenuContent,
+  MenuList,
+  MenuListItem,
+  MenuListLink,
+  MenuListLinkIcon,
+  MenuLanguages,
+  MenuLanguagesItem,
+  NavigationWrapper,
+};

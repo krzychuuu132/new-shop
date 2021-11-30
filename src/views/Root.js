@@ -17,11 +17,9 @@ const Root = () => {
           <GlobalStyle />
           <MainTemplate>
             <Wrapper>
-              <Container style={{ marginTop: '200px' }}>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                </Routes>
-              </Container>
+              <Routes>
+                <Route path="/" element={<Home />} />
+              </Routes>
             </Wrapper>
           </MainTemplate>
         </GridThemeProvider>
