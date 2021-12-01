@@ -1,13 +1,16 @@
 import { ThemeProvider } from 'styled-components';
-import { GridThemeProvider } from 'styled-bootstrap-grid';
+import { Container, GridThemeProvider } from 'styled-bootstrap-grid';
 import { theme } from 'assets/styles/theme.js';
 import { gridTheme } from 'assets/styles/gridTheme.js';
 import { GlobalStyle } from 'assets/styles/GlobalStyle';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Container } from 'styled-bootstrap-grid';
-import Home from './Home';
+import About from './About';
 import MainTemplate from 'components/templates/MainTemplate/MainTemplate';
 import { Wrapper } from 'components/templates/MainTemplate/MainTemplate.styles';
+import Shop from './Shop';
+import Realizations from './Realizations';
+import Contact from './Contact';
+import Homepage from './Homepage';
 
 const Root = () => {
   return (
@@ -17,11 +20,13 @@ const Root = () => {
           <GlobalStyle />
           <MainTemplate>
             <Wrapper>
-              <Container style={{ marginTop: '200px' }}>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                </Routes>
-              </Container>
+              <Routes>
+                <Route path="/" element={<Homepage />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/realizations" element={<Realizations />} />
+                <Route path="/shop" element={<Shop />} />
+                <Route path="/contact" element={<Contact />} />
+              </Routes>
             </Wrapper>
           </MainTemplate>
         </GridThemeProvider>
