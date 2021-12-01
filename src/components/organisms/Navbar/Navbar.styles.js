@@ -129,7 +129,7 @@ const Menu = styled.div`
   z-index: 2;
   overflow-y: auto;
   transition: ${({ theme }) => theme.transition.primary};
-
+  background-color: white;
   ${media.md`
     transform: translateX(0);
     position: initial;
@@ -202,7 +202,7 @@ const MenuListLink = styled(Link)`
 
   ${media.md`
     flex-direction: column;
-    padding: 0 2rem;
+    padding: 2rem;
     border:none;
 
     &:hover{

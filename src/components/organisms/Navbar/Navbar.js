@@ -26,6 +26,7 @@ import {
   NavigationWrapper,
 } from './Navbar.styles';
 import { Container } from 'styled-bootstrap-grid';
+import ShoppingCart from 'components/atoms/ShoppingCart/ShoppingCart';
 
 const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState(false);
@@ -37,7 +38,7 @@ const Navbar = () => {
       <Container>
         <NavigationWrapper>
           <LogoMain>
-            <StyledLink to="#">
+            <StyledLink to="/">
               <MenuIcon src={mainLogo} alt="ikona menu" />
             </StyledLink>
           </LogoMain>
@@ -61,7 +62,7 @@ const Navbar = () => {
             <MenuContent>
               <MenuList>
                 <MenuListItem>
-                  <MenuListLink to="/">
+                  <MenuListLink to="/about">
                     <MenuListLinkIcon>
                       <Home alt="ikona strony głównej" />
                     </MenuListLinkIcon>
@@ -70,7 +71,7 @@ const Navbar = () => {
                 </MenuListItem>
 
                 <MenuListItem>
-                  <MenuListLink to="/">
+                  <MenuListLink to="/realizations">
                     <MenuListLinkIcon>
                       <Realizations alt="ikona realizacji" />
                     </MenuListLinkIcon>
@@ -79,7 +80,7 @@ const Navbar = () => {
                 </MenuListItem>
 
                 <MenuListItem>
-                  <MenuListLink to="/">
+                  <MenuListLink to="/shop">
                     <MenuListLinkIcon>
                       <img src={shop} alt="ikona sklepu" />
                     </MenuListLinkIcon>
@@ -95,6 +96,7 @@ const Navbar = () => {
                     kontakt
                   </MenuListLink>
                 </MenuListItem>
+                <ShoppingCart />
               </MenuList>
             </MenuContent>
           </Menu>

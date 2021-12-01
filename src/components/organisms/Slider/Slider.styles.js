@@ -83,9 +83,13 @@ const SliderImg = styled.img`
 const SliderIndicatorsWrapper = styled.div`
   position: absolute;
   left: 50%;
-  bottom: 5rem;
+  bottom: 3rem;
   transform: translateX(-50%);
   z-index: 2;
+
+  ${media.sm`
+  bottom: 5rem;
+  `}
 `;
 
 const SliderIndicators = styled.div`

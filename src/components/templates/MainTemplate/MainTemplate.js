@@ -7,7 +7,6 @@ const MainTemplate = ({ children }) => {
   return (
     <Wrapper>
       <Navbar />
-      <Slider />
       {children}
     </Wrapper>
   );
