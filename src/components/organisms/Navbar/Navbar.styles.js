@@ -157,7 +157,7 @@ const MenuNavbarContainer = styled.div`
 
 const MenuContent = styled.div`
   height: calc(100vh - 15rem);
-  display: flex;
+  display: ${({ isAuth }) => (isAuth ? 'none' : 'flex')};
   flex-direction: column;
 
   ${media.md`
@@ -202,7 +202,7 @@ const MenuListLink = styled(Link)`
 
   ${media.md`
     flex-direction: column;
-    padding: 2rem;
+    padding: 1rem;
     border:none;
 
     &:hover{
@@ -216,6 +216,10 @@ const MenuListLink = styled(Link)`
     &:hover img{
       fill: ${({ theme }) => theme.colors.primary}
     } 
+  `}
+
+  ${media.lg`
+  padding: 2rem;
   `}
 `;
 
