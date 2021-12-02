@@ -11,6 +11,8 @@ import Shop from './Shop';
 import Realizations from './Realizations';
 import Contact from './Contact';
 import Homepage from './Homepage';
+import LogIn from './LogIn';
+import Register from './Register';
 
 const Root = () => {
   return (
@@ -26,6 +28,8 @@ const Root = () => {
                 <Route path="/realizations" element={<Realizations />} />
                 <Route path="/shop" element={<Shop />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/logowanie" element={<LogIn />} />
+                <Route path="/rejestracja" element={<Register />} />
               </Routes>
             </Wrapper>
           </MainTemplate>

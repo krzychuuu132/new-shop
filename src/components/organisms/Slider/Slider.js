@@ -4,7 +4,7 @@ import { Article, MainSlider, Slide, SliderImg, SliderImgWrapper, SliderIndicato
 
 import sliderPicture from 'assets/homepage/slider/slider-one.jpg';
 import { Col, Container, Row } from 'styled-bootstrap-grid';
-import Button from 'components/atoms/Button';
+import Button from 'components/atoms/Button/Button';
 
 const sliderData = [
   {
@@ -40,7 +40,7 @@ const animateSlider = (wrapper) => {
   const activeText = current.querySelectorAll('.active p');
   const activeTitle = current.querySelectorAll('.active h2');
   const activeButton = current.querySelectorAll('.active button');
-  console.log(activeImg);
+
   gsap.fromTo(activeImg, { opacity: 0 }, { opacity: 1, duration: 3, ease: 'ease-in-out' });
   gsap.fromTo([activeText, activeTitle], { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: 'ease-in-out' });
   gsap.fromTo(activeButton, { y: 30 }, { y: 0, duration: 0.6, ease: 'ease-in-out' });

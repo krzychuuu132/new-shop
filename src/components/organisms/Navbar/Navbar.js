@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { ReactComponent as Home } from 'assets/icons/home.svg';
 import { ReactComponent as Contact } from 'assets/icons/contact.svg';
 import { ReactComponent as Realizations } from 'assets/icons/realizations.svg';
@@ -27,9 +28,14 @@ import {
 } from './Navbar.styles';
 import { Container } from 'styled-bootstrap-grid';
 import ShoppingCart from 'components/atoms/ShoppingCart/ShoppingCart';
+import LogInLink from 'components/atoms/LogInLink/LogInLink';
+import { authorizationMenu } from 'helpers/authorizationMenu';
 
 const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState(false);
+  let location = useLocation();
+
+  const { pathname } = location;
 
   const handleSetActiveMenu = () => setActiveMenu((prevState) => !prevState);
 
@@ -59,7 +65,7 @@ const Navbar = () => {
                 </StyledLink>
               </Logo>
             </MenuNavbar>
-            <MenuContent>
+            <MenuContent isAuth={authorizationMenu(pathname)}>
               <MenuList>
                 <MenuListItem>
                   <MenuListLink to="/about">
@@ -97,6 +103,7 @@ const Navbar = () => {
                   </MenuListLink>
                 </MenuListItem>
                 <ShoppingCart />
+                <LogInLink />
               </MenuList>
             </MenuContent>
           </Menu>
