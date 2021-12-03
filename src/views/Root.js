@@ -28,7 +28,7 @@ const Root = () => {
                 <Route path="/realizations" element={<Realizations />} />
                 <Route path="/shop" element={<Shop />} />
                 <Route path="/contact" element={<Contact />} />
-                <Route path="/logowanie" element={<LogIn />} />
+                <Route path="/zaloguj" element={<LogIn />} />
                 <Route path="/rejestracja" element={<Register />} />
               </Routes>
             </Wrapper>
