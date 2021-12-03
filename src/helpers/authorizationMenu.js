@@ -1,1 +1,1 @@
-export const authorizationMenu = (path) => (path === '/zaloguj' || '/rejestracja' ? true : false);
+export const authorizationMenu = (path) => (path === '/zaloguj' || path === '/rejestracja' ? true : false);

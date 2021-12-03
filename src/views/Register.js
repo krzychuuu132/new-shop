@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import AuthTemplate from 'components/templates/AuthTemplate/AuthTemplate';
 
 const Register = (props) => {
   return (
     <div>
-      <h1>Zarejestruj się</h1>
+      <AuthTemplate />
     </div>
   );
 };
