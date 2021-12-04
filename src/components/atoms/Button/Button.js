@@ -1,8 +1,10 @@
 import { Button as Btn, ButtonText } from './Button.styles';
 
-const Button = ({ children }) => {
+const Button = (props) => {
+  const { children } = props;
+
   return (
-    <Btn>
+    <Btn {...props}>
       <ButtonText>{children}</ButtonText>
     </Btn>
   );

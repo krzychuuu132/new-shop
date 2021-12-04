@@ -1,23 +1,22 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Wrapper } from './AuthTemplate.styles';
-import DontHaveAccount from 'components/molecules/DontHaveAccount/DontHaveAccount';
 import { authLayout } from 'helpers/authLayout';
 import LogInForm from 'components/molecules/LogInForm/LogInForm';
 import RegisterForm from 'components/molecules/RegisterForm/RegisterForm';
+import gsap from 'gsap/all';
 
 const AuthTemplate = () => {
   let location = useLocation();
+  const authWrapperRef = useRef(null);
+
+  useEffect(() => {
+    gsap.fromTo(authWrapperRef.current, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: 'ease-in-out' });
+  }, []);
 
   const { pathname } = location;
 
-  console.log(authLayout(pathname), pathname);
-  return (
-    <Wrapper>
-      {<DontHaveAccount isLogIn={authLayout(pathname)} />}
-      {authLayout(pathname) ? <LogInForm /> : <RegisterForm />}
-    </Wrapper>
-  );
+  return <Wrapper ref={authWrapperRef}>{authLayout(pathname) ? <LogInForm isLogIn={authLayout(pathname)} /> : <RegisterForm isLogIn={authLayout(pathname)} />}</Wrapper>;
 };
 
 export default AuthTemplate;
