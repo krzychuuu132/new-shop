@@ -4,7 +4,7 @@ const { buildSchema } = require('graphql');
 const bodyParser = require('body-parser');
 
 const mongoose = require('mongoose');
-const User = require('./models/user');
+const User = require('./models/User');
 
 require('dotenv').config();
 
@@ -12,6 +12,18 @@ const app = express();
 const PORT = 8080;
 
 app.use(bodyParser.json());
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+
+  next();
+});
 
 // Construct a schema, using GraphQL schema language
 const schema = buildSchema(`
@@ -51,22 +63,15 @@ const root = {
 
   createUser: async (args) => {
     const { name, surname, email, password } = args;
-    console.log(name, surname, email, password);
 
-    const newUser = new User({
-      name: name,
-      surname: surname,
-      email: email,
-      password: password,
-    });
+    console.log(email);
 
-    try {
-      const savedUser = await newUser.save();
+    const emailExist = await User.findOne({ email: email });
+    console.log(emailExist);
 
-      return savedUser;
-    } catch (err) {
-      return new Error(err);
-    }
+    if (emailExist) return 'user juz jest';
+
+    return console.log('usera jeszcz enie ma');
   },
 };
 
@@ -79,9 +84,14 @@ app.use(
   })
 );
 
-mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@new-shop.1tmmh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`, () => {
-  console.log('connected to DB!');
-  app.listen(PORT, () => {
-    console.log(`Server is listening at ${PORT}`);
-  });
+mongoose.connect(
+  `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@new-shop.1tmmh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  () => {
+    console.log('connected to DB!');
+  }
+);
+
+app.listen(PORT, () => {
+  console.log(`Server is listening at ${PORT}`);
 });
