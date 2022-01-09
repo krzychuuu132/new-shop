@@ -2,9 +2,16 @@ const express = require('express');
 const { graphqlHTTP } = require('express-graphql');
 const { buildSchema } = require('graphql');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
+const passport = require('passport');
+const flash = require('express-flash');
+const session = require('express-session');
 
 const mongoose = require('mongoose');
 const User = require('./models/User');
+
+const initialize = require('./passport-config');
+initialize(passport);
 
 require('dotenv').config();
 
@@ -24,7 +31,16 @@ app.use((req, res, next) => {
 
   next();
 });
-
+app.use(flash());
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 // Construct a schema, using GraphQL schema language
 const schema = buildSchema(`
   type Query {
@@ -38,12 +54,19 @@ const schema = buildSchema(`
     password: String!
   }
 
+  type AuthData{
+    userId: ID!
+    token: String!
+    tokenExpiration: Int!
+  }
+
   type RootQuery{
     users: [String!]!
+    login(email:String!,password: String!): String!
   }
 
   type RootMutation{
-    createUser(name:String,surname:String,email:String,password:String) : String
+    register(name:String,surname:String,email:String,password:String): String
   }
 
   schema{
@@ -61,17 +84,39 @@ const root = {
     return ['krzysiek', 'damian', 'filip'];
   },
 
-  createUser: async (args) => {
+  login: () => {
+    passport.authenticate('local', {
+      successRedirect: '/',
+      failureRedirect: 'zaloguj',
+      failureFlash: true,
+    });
+  },
+
+  register: async (args) => {
     const { name, surname, email, password } = args;
 
-    console.log(email);
+    try {
+      const emailExist = await User.findOne({ email: email });
 
-    const emailExist = await User.findOne({ email: email });
-    console.log(emailExist);
+      if (emailExist) return 'user o takim e-mailu już istnieje';
 
-    if (emailExist) return 'user juz jest';
+      const hashedPassword = await bcrypt.hash(password, 10);
 
-    return console.log('usera jeszcz enie ma');
+      const newUser = new User({
+        name,
+        surname,
+        email,
+        password: hashedPassword,
+      });
+
+      newUser.save((err) => {
+        if (err) throw new Error(err);
+      });
+
+      return '';
+    } catch (err) {
+      throw new Error(err);
+    }
   },
 };
 
@@ -84,9 +129,16 @@ app.use(
   })
 );
 
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error: '));
+
 mongoose.connect(
   `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@new-shop.1tmmh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
-  { useNewUrlParser: true, useUnifiedTopology: true },
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
   () => {
     console.log('connected to DB!');
   }
