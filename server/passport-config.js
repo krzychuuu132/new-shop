@@ -1,6 +1,8 @@
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('./models/User');
 const bcrypt = require('bcrypt');
+const { GraphQLLocalStrategy, buildContext } = require('graphql-passport');
+const { ApolloServer } = require('apollo-server-express');
 
 const initialize = (passport) => {
   const authenticatedUser = async (email, password, done) => {
@@ -24,7 +26,7 @@ const initialize = (passport) => {
     }
   };
   passport.use(
-    new LocalStrategy({ usernameField: 'email' }, authenticatedUser)
+    new GraphQLLocalStrategy({ usernameField: 'email' }, authenticatedUser)
   );
   passport.serializeUser((user, done) => {});
   passport.deserializeUser((user, done) => {});

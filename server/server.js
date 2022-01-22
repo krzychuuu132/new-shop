@@ -3,15 +3,11 @@ const { graphqlHTTP } = require('express-graphql');
 const { buildSchema } = require('graphql');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
-const passport = require('passport');
-const flash = require('express-flash');
-const session = require('express-session');
+const jwt = require('jsonwebtoken');
 
 const mongoose = require('mongoose');
 const User = require('./models/User');
-
-const initialize = require('./passport-config');
-initialize(passport);
+const isAuth = require('./middleware/is-auth');
 
 require('dotenv').config();
 
@@ -31,16 +27,7 @@ app.use((req, res, next) => {
 
   next();
 });
-app.use(flash());
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-  })
-);
-app.use(passport.initialize());
-app.use(passport.session());
+
 // Construct a schema, using GraphQL schema language
 const schema = buildSchema(`
   type Query {
@@ -54,15 +41,21 @@ const schema = buildSchema(`
     password: String!
   }
 
+  type Error{
+    type: String!
+    message: String!
+  }
+
   type AuthData{
-    userId: ID!
-    token: String!
-    tokenExpiration: Int!
+    userId: ID
+    token: String
+    tokenExpiration: Int
+    error: Error!
   }
 
   type RootQuery{
     users: [String!]!
-    login(email:String!,password: String!): String!
+    login(email:String!,password: String!): AuthData!
   }
 
   type RootMutation{
@@ -84,19 +77,46 @@ const root = {
     return ['krzysiek', 'damian', 'filip'];
   },
 
-  login: () => {
-    passport.authenticate('local', {
-      successRedirect: '/',
-      failureRedirect: 'zaloguj',
-      failureFlash: true,
-    });
+  login: async (args) => {
+    const { email, password } = args;
+    const user = await User.findOne({ email });
+
+    if (!user)
+      return {
+        error: { type: 'email', message: 'user o takim mailu nie istnieje' },
+      };
+
+    try {
+      const comparePassword = await bcrypt.compare(password, user.password);
+
+      if (!comparePassword)
+        return {
+          error: { type: 'password', message: 'hasło jest nieprawidłowe!' },
+        };
+
+      const token = jwt.sign(
+        { userId: user.id, email: user.email },
+        'secretkey',
+        {
+          expiresIn: '1h',
+        }
+      );
+
+      return {
+        userId: user.id,
+        token: token,
+        tokenExpiration: 1,
+      };
+    } catch (err) {
+      throw new Error(err);
+    }
   },
 
   register: async (args) => {
     const { name, surname, email, password } = args;
 
     try {
-      const emailExist = await User.findOne({ email: email });
+      const emailExist = await User.findOne({ email });
 
       if (emailExist) return 'user o takim e-mailu już istnieje';
 
@@ -113,12 +133,14 @@ const root = {
         if (err) throw new Error(err);
       });
 
-      return '';
+      return 'user stworzony!';
     } catch (err) {
       throw new Error(err);
     }
   },
 };
+
+app.use(isAuth);
 
 app.use(
   '/graphql',
