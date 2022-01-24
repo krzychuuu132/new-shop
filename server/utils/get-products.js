@@ -1,8 +1,6 @@
 const WooCommerceRestApi = require('@woocommerce/woocommerce-rest-api').default;
 require('dotenv').config();
 
-console.log(process.env.PUBLIC_WORDPRESS_SITE_URL);
-
 const api = new WooCommerceRestApi({
   url: process.env.PUBLIC_WORDPRESS_SITE_URL,
   consumerKey: process.env.WC_CONSUMER_KEY,

@@ -28,6 +28,7 @@ const IsAuthProvider = ({ children }) => {
         addAuthData,
       }}
     >
+      {authData.jwt ? authData.jwt : ''}
       {children}
     </AuthContext.Provider>
   );
