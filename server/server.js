@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const User = require('./models/User');
 const isAuth = require('./middleware/is-auth');
+const handler = require('./utils/get-products');
 
 require('dotenv').config();
 
@@ -50,12 +51,26 @@ const schema = buildSchema(`
     userId: ID
     token: String
     tokenExpiration: Int
-    error: Error!
+    error: Error
+  }
+
+  type ProductImage{
+    src:String
+  }
+
+  type Product{
+    price: String!
+    name: String!
+    description: String!
+    short_description: String!
+    sale_price: String!
+    images:[ProductImage!]
   }
 
   type RootQuery{
     users: [String!]!
     login(email:String!,password: String!): AuthData!
+    getProducts:[Product]
   }
 
   type RootMutation{
@@ -77,7 +92,13 @@ const root = {
     return ['krzysiek', 'damian', 'filip'];
   },
 
-  login: async (args) => {
+  getProducts: async () => {
+    const products = await handler();
+    console.log(products);
+    return products;
+  },
+
+  login: async (args, res) => {
     const { email, password } = args;
     const user = await User.findOne({ email });
 
@@ -133,7 +154,7 @@ const root = {
         if (err) throw new Error(err);
       });
 
-      return 'user stworzony!';
+      return;
     } catch (err) {
       throw new Error(err);
     }

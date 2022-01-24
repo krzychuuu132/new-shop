@@ -86,7 +86,7 @@ const Navbar = () => {
                 </MenuListItem>
 
                 <MenuListItem>
-                  <MenuListLink to="/shop">
+                  <MenuListLink to="/produkty">
                     <MenuListLinkIcon>
                       <img src={shop} alt="ikona sklepu" />
                     </MenuListLinkIcon>

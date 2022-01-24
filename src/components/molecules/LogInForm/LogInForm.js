@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Section } from 'components/atoms/Section/Section.styles';
 import { Col, Container, Row } from 'styled-bootstrap-grid';
@@ -11,6 +11,8 @@ import Form from 'components/atoms/Form/Form';
 import { useForm } from 'react-hook-form';
 import ErrorMessage from 'components/atoms/ErrorMessage/ErrorMessage';
 import { gql, useLazyQuery, useMutation, useQuery } from '@apollo/client';
+import { AuthContext } from 'providers/IsAuthProvider';
+import { useNavigate } from 'react-router-dom';
 
 const errorMessages = {
   nameRequired: 'Pole Imię jest wymagane',
@@ -39,7 +41,10 @@ const REGISTER_USER = gql`
 `;
 
 const LogInForm = ({ isLogIn }) => {
-  const [sendData, { loading, error, data }] = useLazyQuery(REGISTER_USER);
+  const [sendData, { loading, error, data: data2 }] =
+    useLazyQuery(REGISTER_USER);
+
+  let navigate = useNavigate();
 
   const {
     nameRequired,
@@ -60,6 +65,8 @@ const LogInForm = ({ isLogIn }) => {
     setError,
   } = useForm();
 
+  const { addAuthData, jwt } = useContext(AuthContext);
+  //console.log(data2.login.error);
   const onSubmit = async (data) => {
     try {
       const { data: response } = await sendData({
@@ -68,12 +75,18 @@ const LogInForm = ({ isLogIn }) => {
           password: data.password,
         },
       });
+      console.log(response.login.error);
+
       if (response.login.error) {
         const { type, message } = response.login.error;
-        return await setError(type, {
+        setError(type, {
           type: 'manual',
           message: message,
         });
+      } else {
+        const { token, userId, tokenExpiration } = response.login;
+        addAuthData(token, userId, tokenExpiration);
+        navigate('/');
       }
     } catch (err) {
       console.log(err);

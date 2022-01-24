@@ -6,9 +6,11 @@ import ButtonLink from 'components/atoms/ButtonLink/ButtonLink';
 const DontHaveAccount = ({ isLogIn }) => {
   return (
     <div>
-      <h2>{isLogIn ? 'Posiadasz konto ?' : 'Nie posiadasz konta?'}</h2>
+      <h2>{!isLogIn ? 'Posiadasz konto ?' : 'Nie posiadasz konta?'}</h2>
 
-      <ButtonLink to={isLogIn ? '/rejestracja' : '/zaloguj'}>{isLogIn ? 'Zaloguj się' : 'Zarejestruj się'}</ButtonLink>
+      <ButtonLink to={isLogIn ? '/rejestracja' : '/zaloguj'}>
+        {!isLogIn ? 'Zaloguj się' : 'Zarejestruj się'}
+      </ButtonLink>
     </div>
   );
 };

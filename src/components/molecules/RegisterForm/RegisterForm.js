@@ -78,7 +78,7 @@ const RegisterForm = ({ isLogIn }) => {
     });
     console.log(response);
 
-    if (response.register !== '') {
+    if (response.register) {
       return setError('email', {
         type: 'manual',
         message: response.register,
