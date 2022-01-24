@@ -13,29 +13,38 @@ import Contact from './Contact';
 import Homepage from './Homepage';
 import LogIn from './LogIn';
 import Register from './Register';
+import IsAuthProvider from 'providers/IsAuthProvider';
+import Products from './Products';
+import { Provider } from 'react-redux';
+import store from 'store';
 
 const Root = () => {
   return (
-    <Router>
-      <ThemeProvider theme={theme}>
-        <GridThemeProvider gridTheme={gridTheme}>
-          <GlobalStyle />
-          <MainTemplate>
-            <Wrapper>
-              <Routes>
-                <Route path="/" element={<Homepage />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/realizations" element={<Realizations />} />
-                <Route path="/shop" element={<Shop />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/zaloguj" element={<LogIn />} />
-                <Route path="/rejestracja" element={<Register />} />
-              </Routes>
-            </Wrapper>
-          </MainTemplate>
-        </GridThemeProvider>
-      </ThemeProvider>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <ThemeProvider theme={theme}>
+          <GridThemeProvider gridTheme={gridTheme}>
+            <GlobalStyle />
+            <MainTemplate>
+              <IsAuthProvider>
+                <Wrapper>
+                  <Routes>
+                    <Route path="/" element={<Homepage />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/realizations" element={<Realizations />} />
+                    <Route path="/shop" element={<Shop />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/zaloguj" element={<LogIn />} />
+                    <Route path="/rejestracja" element={<Register />} />
+                    <Route path="/produkty" element={<Products />} />
+                  </Routes>
+                </Wrapper>
+              </IsAuthProvider>
+            </MainTemplate>
+          </GridThemeProvider>
+        </ThemeProvider>
+      </Router>
+    </Provider>
   );
 };
 

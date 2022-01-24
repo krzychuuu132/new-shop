@@ -1,0 +1,7 @@
+const GET_PRODUCT = 'GET_PRODUCT';
+const ADD_PRODUCTS = 'GET_PRODUCT';
+
+export default {
+  GET_PRODUCT,
+  ADD_PRODUCTS,
+};

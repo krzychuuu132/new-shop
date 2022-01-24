@@ -1,3 +1,4 @@
+import { media } from 'styled-bootstrap-grid';
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
@@ -17,6 +18,11 @@ body {
   font-family: "Barlow";
   overflow-x: hidden;
   padding-bottom: 15rem;
+  padding-top: 7.82rem;
+
+  ${media.md`
+  padding-top: 10.9rem;
+  `}
 }
 
 
