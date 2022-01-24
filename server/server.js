@@ -70,7 +70,7 @@ const schema = buildSchema(`
   type RootQuery{
     users: [String!]!
     login(email:String!,password: String!): AuthData!
-    getProducts:[Product]
+    products:[Product]
   }
 
   type RootMutation{
@@ -92,7 +92,7 @@ const root = {
     return ['krzysiek', 'damian', 'filip'];
   },
 
-  getProducts: async () => {
+  products: async () => {
     const products = await handler();
     console.log(products);
     return products;
