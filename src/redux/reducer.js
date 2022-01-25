@@ -1,16 +1,16 @@
 import types from './types';
-import GetProducts from './operations';
 
 const getProducts = {
-  products: ['pierwszy produkt', 'drugi produkt'],
+  products: [],
 };
 
 const productsReducer = (state = getProducts, action) => {
   switch (action.type) {
-    case types.GET_PRODUCT:
+    case types.ADD_PRODUCTS:
+      console.log(action.products);
       return {
         ...state,
-        products: [...state.products, action.product],
+        products: action.products,
       };
     default:
       return state;

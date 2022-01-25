@@ -1,8 +1,8 @@
 const { default: types } = require('./types');
 
-const add = (item) => ({
+const add = (products) => ({
   type: types.ADD_PRODUCTS,
-  item,
+  products,
 });
 
 export default {

@@ -1,5 +1,5 @@
 const GET_PRODUCT = 'GET_PRODUCT';
-const ADD_PRODUCTS = 'GET_PRODUCT';
+const ADD_PRODUCTS = 'ADD_PRODUCTS';
 
 export default {
   GET_PRODUCT,
