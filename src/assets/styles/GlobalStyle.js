@@ -55,6 +55,13 @@ h6 {
   color: $text-color;
 }
 
+section{
+  padding: 4rem 0;
+  ${media.lg`
+    padding: 9rem 0;
+  `}
+}
+
 p {
   font-size: 1.4rem;
   letter-spacing: 0.08em;

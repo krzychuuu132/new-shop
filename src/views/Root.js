@@ -14,7 +14,7 @@ import Homepage from './Homepage';
 import LogIn from './LogIn';
 import Register from './Register';
 import IsAuthProvider from 'providers/IsAuthProvider';
-import Products from './Products';
+import Products from './Products/Products';
 import { Provider } from 'react-redux';
 import store from 'store';
 
