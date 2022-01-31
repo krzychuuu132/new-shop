@@ -15,8 +15,10 @@ import LogIn from './LogIn';
 import Register from './Register';
 import IsAuthProvider from 'providers/IsAuthProvider';
 import Products from './Products/Products';
-import { Provider } from 'react-redux';
+import { Provider, useDispatch } from 'react-redux';
 import store from 'store';
+import ProductDetails from './ProductDetails/ProductDetails';
+import ShoppingCard from './ShoppingCard/ShoppingCard';
 
 const Root = () => {
   return (
@@ -37,6 +39,8 @@ const Root = () => {
                     <Route path="/zaloguj" element={<LogIn />} />
                     <Route path="/rejestracja" element={<Register />} />
                     <Route path="/produkty" element={<Products />} />
+                    <Route path="/produkty/:id" element={<ProductDetails />} />
+                    <Route path="/koszyk" element={<ShoppingCard />} />
                   </Routes>
                 </Wrapper>
               </IsAuthProvider>

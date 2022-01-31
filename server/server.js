@@ -5,8 +5,8 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const isAuth = require('./middleware/is-auth');
 
-const { schema } = require('./graphql/schema/schema');
-const { resolvers } = require('./graphql/resolvers/resolvers');
+const schema = require('./graphql/schema/schema');
+const resolvers = require('./graphql/resolvers/resolvers');
 
 require('dotenv').config();
 
