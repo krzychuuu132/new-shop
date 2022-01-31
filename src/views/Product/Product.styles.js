@@ -7,6 +7,7 @@ const ProductPicture = styled.picture`
   display: block;
   position: relative;
   cursor: pointer;
+  min-height: 30rem;
 `;
 
 const ProductImg = styled.img`
@@ -47,7 +48,6 @@ const ProductDescription = styled.div`
 
 const ProductLinkWrapper = styled.div`
   width: 95%;
-  padding: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,6 +59,10 @@ const ProductLinkWrapper = styled.div`
   transform: translateX(-50%) translateY(1rem);
   opacity: 0;
   transition: ${({ theme }) => theme.transition.primary};
+
+  a {
+    padding: 2rem;
+  }
 `;
 
 const ProductWrapper = styled.div`

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { media } from 'styled-bootstrap-grid';
 
 const Article = styled.article`
-  margin-top: 8rem;
+  //margin-top: 8rem;
   position: relative;
   z-index: 1;
   height: calc(100vh - 80px);
@@ -10,7 +10,7 @@ const Article = styled.article`
 
   ${media.md`
     height:60vh;
-    margin-top: 10rem;
+    //margin-top: 10rem;
   `}
 
   ${media.xl`
@@ -28,7 +28,11 @@ const Article = styled.article`
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, rgba(0, 0, 0, 0.75) 0%, rgba(255, 255, 255, 0) 100%);
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.75) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
     z-index: 1;
   }
 `;
@@ -117,4 +121,16 @@ const SliderIndicatorsBtn = styled.button`
   }
 `;
 
-export { Article, MainSlider, SliderBody, SliderTitle, SliderDescription, SliderImg, Slide, SliderIndicators, SliderIndicatorsBtn, SliderImgWrapper, SliderIndicatorsWrapper };
+export {
+  Article,
+  MainSlider,
+  SliderBody,
+  SliderTitle,
+  SliderDescription,
+  SliderImg,
+  Slide,
+  SliderIndicators,
+  SliderIndicatorsBtn,
+  SliderImgWrapper,
+  SliderIndicatorsWrapper,
+};

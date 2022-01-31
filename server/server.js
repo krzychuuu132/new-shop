@@ -29,8 +29,6 @@ app.use((req, res, next) => {
 
 app.use(isAuth);
 
-console.log(schema);
-
 app.use(
   '/graphql',
   graphqlHTTP({

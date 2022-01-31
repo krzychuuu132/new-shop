@@ -2,31 +2,41 @@ import types from './types';
 
 const getProducts = {
   products: [],
+  loading: true,
+};
+
+const shopActivities = {
+  basketProducts: [],
+  price: 0,
 };
 
 const productsReducer = (state = getProducts, action) => {
   switch (action.type) {
     case types.ADD_PRODUCTS:
-      console.log(action.products);
       return {
         ...state,
         products: action.products,
       };
-    default:
-      return state;
-  }
-};
 
-const testReducer = (state = getProducts, action) => {
-  switch (action.type) {
-    case types.GET_PRODUCT:
+    case types.LOADING:
       return {
-        ...state,
-        products: [...state.products, action.product],
+        loading: action.loading,
       };
     default:
       return state;
   }
 };
 
-export default { productsReducer, testReducer };
+const shopActivitiesReducer = (state = shopActivities, action) => {
+  switch (action.type) {
+    case types.ADD_TO_SHOPPING_CARD:
+      return {
+        ...state,
+        basketProducts: [...state.basketProducts, action.product],
+      };
+    default:
+      return state;
+  }
+};
+
+export default { productsReducer, shopActivitiesReducer };
