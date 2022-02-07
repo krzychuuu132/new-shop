@@ -5,6 +5,7 @@ import { Wrapper } from './MainTemplate.styles';
 import { gql, useQuery } from '@apollo/client';
 import { useDispatch } from 'react-redux';
 import Breadcrumb from 'components/molecules/Breadcrumb/Breadcrumb';
+import ShortBasket from 'components/organisms/ShortBasket/ShortBasket';
 
 const GET_PRODUCTS = gql`
   query GetProducts {
@@ -37,6 +38,8 @@ const MainTemplate = ({ children }) => {
       <Navbar />
       <Breadcrumb />
       {children}
+
+      <ShortBasket />
     </Wrapper>
   );
 };

@@ -34,6 +34,16 @@ const shopActivitiesReducer = (state = shopActivities, action) => {
         ...state,
         basketProducts: [...state.basketProducts, action.product],
       };
+    case types.CHANGE_QUANTITY: {
+      return {
+        ...state,
+        basketProducts: state.basketProducts.map((product) =>
+          product.id === action.id
+            ? { ...product, quantity: product.quantity + action.quantity }
+            : product
+        ),
+      };
+    }
     default:
       return state;
   }
