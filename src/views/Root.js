@@ -19,6 +19,7 @@ import { Provider, useDispatch } from 'react-redux';
 import store from 'store';
 import ProductDetails from './ProductDetails/ProductDetails';
 import ShoppingCard from './ShoppingCard/ShoppingCard';
+import ShortBasketProvider from 'providers/ShortBasketProvider';
 
 const Root = () => {
   return (
@@ -29,20 +30,25 @@ const Root = () => {
             <GlobalStyle />
             <MainTemplate>
               <IsAuthProvider>
-                <Wrapper>
-                  <Routes>
-                    <Route path="/" element={<Homepage />} />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/realizations" element={<Realizations />} />
-                    <Route path="/shop" element={<Shop />} />
-                    <Route path="/contact" element={<Contact />} />
-                    <Route path="/zaloguj" element={<LogIn />} />
-                    <Route path="/rejestracja" element={<Register />} />
-                    <Route path="/produkty" element={<Products />} />
-                    <Route path="/produkty/:id" element={<ProductDetails />} />
-                    <Route path="/koszyk" element={<ShoppingCard />} />
-                  </Routes>
-                </Wrapper>
+                <ShortBasketProvider>
+                  <Wrapper>
+                    <Routes>
+                      <Route path="/" element={<Homepage />} />
+                      <Route path="/about" element={<About />} />
+                      <Route path="/realizations" element={<Realizations />} />
+                      <Route path="/shop" element={<Shop />} />
+                      <Route path="/contact" element={<Contact />} />
+                      <Route path="/zaloguj" element={<LogIn />} />
+                      <Route path="/rejestracja" element={<Register />} />
+                      <Route path="/produkty" element={<Products />} />
+                      <Route
+                        path="/produkty/:id"
+                        element={<ProductDetails />}
+                      />
+                      <Route path="/koszyk" element={<ShoppingCard />} />
+                    </Routes>
+                  </Wrapper>
+                </ShortBasketProvider>
               </IsAuthProvider>
             </MainTemplate>
           </GridThemeProvider>

@@ -13,9 +13,13 @@ import {
 
 const ProductDetails = () => {
   const [productSize, setProductSize] = useState('XS');
+  const [productQuantity, setProductQuantity] = useState(1);
 
   // REDUX STATE
   const { products } = useSelector((state) => state.productsReducer);
+  const { basketProducts } = useSelector(
+    (state) => state.shopActivitiesReducer
+  );
 
   const dispatch = useDispatch();
 
@@ -27,14 +31,27 @@ const ProductDetails = () => {
 
   const handlechangeSize = (e) => setProductSize(e.target.value);
 
+  const handleChangeQuanity = (e) =>
+    setProductQuantity(parseInt(e.target.value));
+
   const handleAddToBasket = () => {
     const newProduct = Object.assign({}, product);
     newProduct.size = productSize;
+    newProduct.quantity = productQuantity;
+
+    const productExist = basketProducts.find((product) => product.id === id);
+
+    if (productExist) {
+      console.log(productExist);
+      return dispatch({
+        type: 'CHANGE_QUANTITY',
+        id: productExist.id,
+        quantity: productQuantity,
+      });
+    }
 
     dispatch({ type: 'ADD_TO_SHOPPING_CARD', product: newProduct });
   };
-
-  console.log(productSize);
 
   return (
     <MainTemplate>
@@ -60,6 +77,15 @@ const ProductDetails = () => {
                     <option value="S">S</option>
                     <option value="M">M</option>
                     <option value="XL">XL</option>
+                  </select>
+                  <select
+                    value={productQuantity}
+                    onChange={handleChangeQuanity}
+                  >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
                   </select>
                   <p>
                     <span>{price}</span>
