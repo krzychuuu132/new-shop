@@ -76,7 +76,6 @@ const RegisterForm = ({ isLogIn }) => {
         password: data.password,
       },
     });
-    console.log(response);
 
     if (response.register) {
       return setError('email', {

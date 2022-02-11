@@ -8,14 +8,14 @@ const api = new WooCommerceRestApi({
   version: 'wc/v3',
 });
 
-const getProducts = async (req, res) => {
+const getCatgories = async (req, res) => {
   const responsData = {
     success: false,
-    products: [],
+    categories: [],
   };
 
   try {
-    const { data } = await api.get('products', { per_page: 50 });
+    const { data } = await api.get('products/categories');
 
     responsData.success = true;
     responsData.products = data;
@@ -27,4 +27,4 @@ const getProducts = async (req, res) => {
   }
 };
 
-module.exports = getProducts;
+module.exports = getCatgories;

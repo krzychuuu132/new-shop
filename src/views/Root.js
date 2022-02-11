@@ -45,6 +45,10 @@ const Root = () => {
                         path="/produkty/:id"
                         element={<ProductDetails />}
                       />
+                      <Route
+                        path="/produkty/category=:id"
+                        element={<Products />}
+                      />
                       <Route path="/koszyk" element={<ShoppingCard />} />
                     </Routes>
                   </Wrapper>

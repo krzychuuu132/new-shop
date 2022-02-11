@@ -1,5 +1,6 @@
 const User = require('../../models/User');
-const handler = require('../../utils/get-products');
+const getProducts = require('../../utils/get-products');
+const getCatgories = require('../../utils/get-categories');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -12,9 +13,15 @@ const resolvers = {
   },
 
   products: async () => {
-    const products = await handler();
+    const products = await getProducts();
     console.log(products);
     return products;
+  },
+
+  categories: async () => {
+    const catgories = await getCatgories();
+
+    return catgories;
   },
 
   login: async (args, res) => {

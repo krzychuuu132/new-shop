@@ -9,7 +9,7 @@ const ShortBasket = (props) => {
         <h2>Twój koszyk</h2> <button>X</button>
       </div>
 
-      <div class="products-body">Koszyk jest pusty</div>
+      <div className="products-body">Koszyk jest pusty</div>
 
       <p>
         <strong>Łączna kwota: 0,00zł</strong>
