@@ -19,6 +19,10 @@ const GET_PRODUCTS = gql`
       images {
         src
       }
+      categories {
+        id
+        name
+      }
     }
   }
 `;

@@ -9,6 +9,7 @@ const ShortBasketWrapper = styled.div`
   width: 40rem;
   background-color: lightgray;
   z-index: 2;
+  display: none;
 `;
 
 export { ShortBasketWrapper };

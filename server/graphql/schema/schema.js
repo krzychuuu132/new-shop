@@ -28,6 +28,11 @@ const schema = buildSchema(`
     src:String
   }
 
+  type Category{
+    id: ID!
+    name: String!
+  }
+
   type Product{
     id: ID!
     price: String!
@@ -36,12 +41,15 @@ const schema = buildSchema(`
     short_description: String!
     sale_price: String!
     images:[ProductImage!]
+    categories: [Category]
   }
+
 
   type RootQuery{
     users: [String!]!
     login(email:String!,password: String!): AuthData!
     products:[Product]
+    categories:[Category!]!
   }
 
   type RootMutation{
