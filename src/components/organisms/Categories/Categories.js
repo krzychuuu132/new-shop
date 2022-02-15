@@ -2,6 +2,7 @@ import React from 'react';
 import { gql, useQuery } from '@apollo/client';
 import PropTypes from 'prop-types';
 import Category from 'components/atoms/Category/Category';
+import { CategoriesNav } from './Categories.styles';
 
 const GET_CATEGORIES = gql`
   query getCatgories {
@@ -21,11 +22,11 @@ const Categories = (props) => {
   const { categories } = data;
 
   return (
-    <nav>
+    <CategoriesNav>
       {categories.map((category) => (
         <Category category={category} key={category.id} />
       ))}
-    </nav>
+    </CategoriesNav>
   );
 };
 

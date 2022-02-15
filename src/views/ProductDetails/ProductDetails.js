@@ -42,7 +42,6 @@ const ProductDetails = () => {
     const productExist = basketProducts.find((product) => product.id === id);
 
     if (productExist) {
-      console.log(productExist);
       return dispatch({
         type: 'CHANGE_QUANTITY',
         id: productExist.id,
