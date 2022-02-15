@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { CategoryLink } from './Category.styles';
 
-const Category = ({ category: { id: index, name } }) => {
-  const { id } = useParams();
-  console.log(id, index);
-  return <Link to={`/produkty/category=${index}`}>{name}</Link>;
-};
+const Category = ({ category: { id: index, name } }) => (
+  <CategoryLink to={`/produkty/category=${index}`} activeClassName="active">
+    {name}
+  </CategoryLink>
+);
 
 Category.propTypes = {};
 

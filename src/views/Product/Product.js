@@ -21,7 +21,9 @@ const Product = ({ product: { id, name, images } }) => {
           <ProductPicture>
             <ProductImg src={images[0].src} alt={name} />
             <ProductLinkWrapper>
-              <ProductLink to={`${id}`}>przejdź do produktu</ProductLink>
+              <ProductLink to={`/produkty/${id}`}>
+                przejdź do produktu
+              </ProductLink>
             </ProductLinkWrapper>
           </ProductPicture>
           <ProductFigCaption>
