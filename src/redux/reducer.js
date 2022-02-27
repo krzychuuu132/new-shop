@@ -44,6 +44,16 @@ const shopActivitiesReducer = (state = shopActivities, action) => {
         ),
       };
     }
+
+    case types.CHANGE_PRICE: {
+      return {
+        ...state,
+        price: state.basketProducts.reduce((prev, curr) => {
+          console.log(prev, curr);
+          return prev * 1 + curr.price * curr.quantity;
+        }, []),
+      };
+    }
     default:
       return state;
   }

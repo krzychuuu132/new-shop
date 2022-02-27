@@ -32,6 +32,8 @@ const MainTemplate = ({ children }) => {
 
   const dispatch = useDispatch();
 
+  //console.log(Breadcrumb);
+
   useEffect(() => {
     if (getProducts) {
       dispatch({ type: 'ADD_PRODUCTS', products: getProducts.products });
@@ -39,8 +41,9 @@ const MainTemplate = ({ children }) => {
   }, [getProducts]);
   return (
     <Wrapper>
-      <Navbar />
       <Breadcrumb />
+      <Navbar />
+
       {children}
 
       <ShortBasket />

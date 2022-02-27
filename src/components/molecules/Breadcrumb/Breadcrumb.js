@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const Breadcrumb = (props) => {
   return (
     <div>
-      <h2>Breadcrumb</h2>
+      <h2>Breadcrumb1</h2>
     </div>
   );
 };
