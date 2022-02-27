@@ -42,14 +42,18 @@ const ProductDetails = () => {
     const productExist = basketProducts.find((product) => product.id === id);
 
     if (productExist) {
-      return dispatch({
-        type: 'CHANGE_QUANTITY',
-        id: productExist.id,
-        quantity: productQuantity,
-      });
+      return (
+        dispatch({
+          type: 'CHANGE_QUANTITY',
+          id: productExist.id,
+          quantity: productQuantity,
+        }),
+        dispatch({ type: 'CHANGE_PRICE' })
+      );
     }
 
     dispatch({ type: 'ADD_TO_SHOPPING_CARD', product: newProduct });
+    dispatch({ type: 'CHANGE_PRICE' });
   };
 
   return (
