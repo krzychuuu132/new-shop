@@ -53,6 +53,22 @@ const shopActivitiesReducer = (state = shopActivities, action) => {
         }, []),
       };
     }
+
+    case types.DELETE_FROM_SHOPPING_CARD: {
+      return {
+        ...state,
+        basketProducts: state.basketProducts.filter(
+          (basketProduct) => basketProduct.id !== action.id
+        ),
+      };
+    }
+
+    case types.REMOVE_PRODUCTS_FROM_BASKET: {
+      return {
+        ...state,
+        basketProducts: [],
+      };
+    }
     default:
       return state;
   }
