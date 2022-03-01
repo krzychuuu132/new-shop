@@ -1,12 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const BasketProduct = ({ basketProduct: { name } }) => {
+import {
+  ProductContent,
+  ProductImg,
+  ProductQuantity,
+  ProductDetails,
+  ProductSum,
+  ProductTitle,
+  Wrapper,
+} from './BasketProduct.styles';
+
+const BasketProduct = ({
+  basketProduct: { name, price, images, categories, quantity },
+}) => {
   console.log(name);
   return (
-    <div>
-      <h1>{name}</h1>
-    </div>
+    <Wrapper>
+      <ProductContent>
+        <ProductImg />
+        <ProductTitle />
+        <ProductQuantity />
+      </ProductContent>
+      <ProductDetails>
+        <button>usuń</button>
+
+        <ProductSum>
+          <span>
+            {quantity}x{price},00 zł
+          </span>
+        </ProductSum>
+      </ProductDetails>
+    </Wrapper>
   );
 };
 
