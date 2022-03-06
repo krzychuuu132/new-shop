@@ -57,6 +57,7 @@ const schema = buildSchema(`
     login(email:String!,password: String!): AuthData!
     products:[Product]
     categories:[Category!]!
+    account(id: ID!): User!
   }
 
   type RootMutation{

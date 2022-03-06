@@ -84,7 +84,7 @@ const ProductDetails = () => {
                   ))}
                 </ProductDetailsImage>
               </Col>
-              <Col lg="7" offset="1">
+              <Col lg="7" lgOffset="1">
                 <ProductsDetailsContent>
                   <h2>{name}</h2>
                   <p>{removeHTMLTags(description)}</p>

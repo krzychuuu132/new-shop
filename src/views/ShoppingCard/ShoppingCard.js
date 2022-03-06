@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import MainTemplate from 'components/templates/MainTemplate/MainTemplate';
 import { Col, Container, Row } from 'styled-bootstrap-grid';
 import PropTypes from 'prop-types';
@@ -14,6 +14,8 @@ import {
 } from './ShoppingCard.styles';
 import { useDispatch } from 'react-redux';
 import { ProductsSection } from 'views/Products/Products.styles';
+import { AuthContext } from 'providers/IsAuthProvider';
+import ButtonLink from 'components/atoms/ButtonLink/ButtonLink';
 
 const ShoppingCard = () => {
   const { basketProducts, price } = useSelector(
@@ -21,6 +23,8 @@ const ShoppingCard = () => {
   );
 
   const dispatch = useDispatch();
+
+  const { jwt } = useContext(AuthContext);
 
   const handleRemoveProducts = () => {
     dispatch({ type: 'REMOVE_PRODUCTS_FROM_BASKET' });
@@ -50,7 +54,7 @@ const ShoppingCard = () => {
               </Col>
               <Col lg="4" lgOffset="1">
                 <SummaryWrapper>
-                  <Button>Przejdź do logowania</Button>
+                  <ButtonLink to="/zaloguj">Przejdź do logowania</ButtonLink>
                   <SummaryTitle>Podsumowanie</SummaryTitle>
                   <SummaryContent>
                     <h3>Cena za produkty</h3>
@@ -61,7 +65,9 @@ const ShoppingCard = () => {
                     <h3>{price},00 zł</h3>
                   </SummaryContent>
 
-                  <Button to="/next">Przejdź do dostawy i płatności </Button>
+                  <ButtonLink to={jwt ? '/zamowienie' : '/zaloguj'}>
+                    {jwt ? 'Przejdź do dostawy i płatności' : 'Zaloguj się'}{' '}
+                  </ButtonLink>
                 </SummaryWrapper>
               </Col>
             </Row>

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import arrowIcon from 'assets/icons/arrow.svg';
 import { Link } from 'react-router-dom';
 
@@ -7,9 +7,8 @@ export const ButtonText = styled.span`
   transition: transform 0.3s ease-in-out;
 `;
 
-export const Button = styled.button`
+export const ButtonStyles = css`
   background-color: ${({ theme }) => theme.colors.primary};
-  color: white;
   text-transform: uppercase;
   padding: 1.5rem 3rem;
   letter-spacing: 0.07em;
@@ -20,6 +19,11 @@ export const Button = styled.button`
   display: flex;
   justify-content: center;
   will-change: transform, opacity;
+  color: white;
+
+  span {
+    color: white;
+  }
 
   &:hover::after {
     transform: translateX(1rem);
@@ -35,4 +39,8 @@ export const Button = styled.button`
     margin-left: 1rem;
     transition: transform 0.3s ease-in-out, opacity 0.4s ease-in-out;
   }
+`;
+
+export const Button = styled.button`
+  ${ButtonStyles}
 `;
