@@ -1,13 +1,19 @@
+import Breadcrumb from 'components/molecules/Breadcrumb/Breadcrumb';
 import React from 'react';
-import { Row, Col } from 'styled-bootstrap-grid';
+import { Row, Col, Container } from 'styled-bootstrap-grid';
 
 const About = () => {
   return (
-    <Row>
-      <Col col={12}>
-        <h1>About</h1>
-      </Col>
-    </Row>
+    <>
+      <Container>
+        <Breadcrumb title="o nas" />
+        <Row>
+          <Col col={12}>
+            <h1>About</h1>
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 };
 

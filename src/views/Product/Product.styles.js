@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { media } from 'styled-bootstrap-grid';
 import styled from 'styled-components';
 
 const ProductFigure = styled.figure``;
@@ -47,18 +48,25 @@ const ProductDescription = styled.div`
 `;
 
 const ProductLinkWrapper = styled.div`
-  width: 95%;
+  width: 90%;
+  max-width: 30rem;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
   background-color: ${({ theme }) => theme.colors.primary};
   position: absolute;
-  bottom: 1rem;
+  bottom: 2rem;
   left: 50%;
   transform: translateX(-50%) translateY(1rem);
-  opacity: 0;
   transition: ${({ theme }) => theme.transition.primary};
+  opacity: 1;
+
+  ${media.lg`
+  opacity: 0;
+  width: 95%;
+  bottom: 1rem;
+`}
 
   a {
     padding: 2rem;

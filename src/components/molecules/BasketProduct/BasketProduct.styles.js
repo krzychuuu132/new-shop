@@ -34,6 +34,20 @@ const ProductDetails = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  button {
+    background-color: transparent;
+    border: none;
+
+    img {
+      max-width: 2rem;
+      transition: ${({ theme }) => theme.transition.primary};
+
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+  }
 `;
 
 const ProductSum = styled.p``;

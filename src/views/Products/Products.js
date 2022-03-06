@@ -8,6 +8,7 @@ import { ProductsSection, ProductsWrapper } from './Products.styles';
 import Loader from 'components/molecules/Loader/Loader';
 import Categories from 'components/organisms/Categories/Categories';
 import { useParams } from 'react-router-dom';
+import Breadcrumb from 'components/molecules/Breadcrumb/Breadcrumb';
 
 const Products = () => {
   // REDUX STATE
@@ -25,7 +26,9 @@ const Products = () => {
   return (
     <MainTemplate>
       <Container>
+        <Breadcrumb title="Nasza oferta" />
         <ProductsSection>
+          <h2>Filruj według kategorii :</h2>
           <Categories />
           <ProductsWrapper>
             <Row>

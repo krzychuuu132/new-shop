@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-
 import {
   ProductContent,
   ProductImg,
@@ -12,8 +11,10 @@ import {
   Wrapper,
 } from './BasketProduct.styles';
 
+import BasketIcon from 'assets/icons/basket.png';
+
 const BasketProduct = ({
-  basketProduct: { name, price, images, categories, quantity, id },
+  basketProduct: { name, price, images, categories, quantity, id, size },
 }) => {
   const dispatch = useDispatch();
 
@@ -29,10 +30,13 @@ const BasketProduct = ({
         <ProductTitle>
           {name}
           <ProductQuantity>{quantity} szt</ProductQuantity>
+          {size ? <ProductQuantity>Rozmiar: {size}</ProductQuantity> : null}
         </ProductTitle>
       </ProductContent>
       <ProductDetails>
-        <button onClick={() => handleRemoveProduct(id)}>usuń</button>
+        <button onClick={() => handleRemoveProduct(id)}>
+          <img src={BasketIcon} alt="ikona kosza" />
+        </button>
 
         <ProductSum>
           <span>

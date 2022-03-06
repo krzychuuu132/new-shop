@@ -33,6 +33,12 @@ const schema = buildSchema(`
     name: String!
   }
 
+
+  type Attribute{
+    id: ID!
+    options: [String]
+  }
+
   type Product{
     id: ID!
     price: String!
@@ -42,6 +48,7 @@ const schema = buildSchema(`
     sale_price: String!
     images:[ProductImage!]
     categories: [Category]
+    attributes: [Attribute]
   }
 
 

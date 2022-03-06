@@ -70,12 +70,20 @@ const SliderBody = styled.div`
 
   button {
     margin-top: 2rem;
+
+    span {
+      color: #fff;
+    }
   }
 `;
 
-const SliderTitle = styled.h2``;
+const SliderTitle = styled.h2`
+  color: #fff;
+`;
 
-const SliderDescription = styled.p``;
+const SliderDescription = styled.p`
+  color: #fff;
+`;
 
 const SliderImg = styled.img`
   display: block;
