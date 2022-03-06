@@ -14,7 +14,6 @@ const resolvers = {
 
   products: async () => {
     const products = await getProducts();
-    console.log(products);
     return products;
   },
 

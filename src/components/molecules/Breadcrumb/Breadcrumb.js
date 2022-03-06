@@ -1,11 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Wrapper, Background } from './Breadcrumb.styles';
 
-const Breadcrumb = (props) => {
+import BreadcrumbPicture from 'assets/breadcrumb/breadcrumb.jpg';
+
+const Breadcrumb = ({ title }) => {
   return (
-    <div>
-      <h2>Breadcrumb1</h2>
-    </div>
+    <Wrapper>
+      <Background src={BreadcrumbPicture} />
+      <h1>{title}</h1>
+    </Wrapper>
   );
 };
 

@@ -31,4 +31,21 @@ const SummaryTitle = styled.h2`
   margin-top: 2rem;
 `;
 
-export { SummaryContent, SummaryTitle, SummaryWrapper, BasketProductsWrapper };
+const BasketLink = styled.button`
+  background-color: transparent;
+  border: none;
+  text-transform: uppercase;
+  transition: ${({ theme }) => theme.transition.primary};
+
+  &:hover {
+    opacity: 0.5;
+  }
+`;
+
+export {
+  SummaryContent,
+  SummaryTitle,
+  SummaryWrapper,
+  BasketProductsWrapper,
+  BasketLink,
+};

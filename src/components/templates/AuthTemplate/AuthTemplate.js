@@ -11,12 +11,24 @@ const AuthTemplate = () => {
   const authWrapperRef = useRef(null);
 
   useEffect(() => {
-    gsap.fromTo(authWrapperRef.current, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: 'ease-in-out' });
+    gsap.fromTo(
+      authWrapperRef.current,
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.4, ease: 'ease-in-out' }
+    );
   }, []);
 
   const { pathname } = location;
 
-  return <Wrapper ref={authWrapperRef}>{authLayout(pathname) ? <LogInForm isLogIn={authLayout(pathname)} /> : <RegisterForm isLogIn={authLayout(pathname)} />}</Wrapper>;
+  return (
+    <Wrapper ref={authWrapperRef}>
+      {authLayout(pathname) ? (
+        <LogInForm isLogIn={authLayout(pathname)} />
+      ) : (
+        <RegisterForm isLogIn={authLayout(pathname)} />
+      )}
+    </Wrapper>
+  );
 };
 
 export default AuthTemplate;

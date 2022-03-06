@@ -8,8 +8,14 @@ import { ProductsSection } from 'views/Products/Products.styles';
 import { Button } from 'components/atoms/Button/Button.styles';
 import {
   ProductDetailsImage,
+  ProductPrice,
   ProductsDetailsContent,
+  Wrapper,
 } from './ProductDetails.styles';
+import Breadcrumb from 'components/molecules/Breadcrumb/Breadcrumb';
+import Select from 'components/atoms/Select/Select';
+
+const ProductQuantity = [1, 2, 3, 4];
 
 const ProductDetails = () => {
   const [productSize, setProductSize] = useState('XS');
@@ -27,7 +33,7 @@ const ProductDetails = () => {
 
   const product = products.find((product) => product.id === id);
 
-  const { name, description, price, images } = product;
+  const { name, description, price, images, attributes } = product;
 
   const handlechangeSize = (e) => setProductSize(e.target.value);
 
@@ -36,7 +42,7 @@ const ProductDetails = () => {
 
   const handleAddToBasket = () => {
     const newProduct = Object.assign({}, product);
-    newProduct.size = productSize;
+    if (attributes.length > 0) newProduct.size = productSize;
     newProduct.quantity = productQuantity;
 
     const productExist = basketProducts.find((product) => product.id === id);
@@ -54,49 +60,61 @@ const ProductDetails = () => {
 
     dispatch({ type: 'ADD_TO_SHOPPING_CARD', product: newProduct });
     dispatch({ type: 'CHANGE_PRICE' });
+    setProductSize('');
+    setProductQuantity('');
+  };
+
+  const removeHTMLTags = (str) => {
+    var tmp = document.createElement('p');
+    tmp.innerHTML = str;
+    return tmp.textContent || tmp.innerText || '';
   };
 
   return (
     <MainTemplate>
       <Container>
+        <Breadcrumb title={`Kup ${name} z dostawą za darmo!`} />
         <ProductsSection>
-          <Row>
-            <Col md="6">
-              <ProductDetailsImage>
-                {images.map((image) => (
-                  <img src={image.src} />
-                ))}
-              </ProductDetailsImage>
-            </Col>
-            <Col md="5" offset="1">
-              <ProductsDetailsContent>
-                <h1>{name}</h1>
-                <p>{description}</p>
+          <Wrapper>
+            <Row alignItems="center">
+              <Col lg="4">
+                <ProductDetailsImage>
+                  {images.map((image) => (
+                    <img src={image.src} />
+                  ))}
+                </ProductDetailsImage>
+              </Col>
+              <Col lg="7" offset="1">
+                <ProductsDetailsContent>
+                  <h2>{name}</h2>
+                  <p>{removeHTMLTags(description)}</p>
 
-                <div className="product__price">
-                  <Button onClick={handleAddToBasket}>Dodaj do koszyka</Button>
-                  <select value={productSize} onChange={handlechangeSize}>
-                    <option value="XS">XS</option>
-                    <option value="S">S</option>
-                    <option value="M">M</option>
-                    <option value="XL">XL</option>
-                  </select>
-                  <select
-                    value={productQuantity}
-                    onChange={handleChangeQuanity}
-                  >
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                  </select>
-                  <p>
-                    <span>{price}</span>
-                  </p>
-                </div>
-              </ProductsDetailsContent>
-            </Col>
-          </Row>
+                  <ProductPrice>
+                    <Button onClick={handleAddToBasket}>
+                      Dodaj do koszyka
+                    </Button>
+
+                    {attributes.length > 0 ? (
+                      <Select
+                        options={attributes[0].options}
+                        value={productSize}
+                        onChange={handlechangeSize}
+                      />
+                    ) : null}
+
+                    <Select
+                      options={ProductQuantity}
+                      value={productQuantity}
+                      onChange={handleChangeQuanity}
+                    />
+                    <p className="h1">
+                      <span>{price} zł</span>
+                    </p>
+                  </ProductPrice>
+                </ProductsDetailsContent>
+              </Col>
+            </Row>
+          </Wrapper>
         </ProductsSection>
       </Container>
     </MainTemplate>

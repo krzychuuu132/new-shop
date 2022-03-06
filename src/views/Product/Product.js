@@ -15,7 +15,7 @@ import {
 
 const Product = ({ product: { id, name, images } }) => {
   return (
-    <Col md="3" key={id}>
+    <Col md="6" lg="4" xl="3" key={id}>
       <ProductWrapper>
         <ProductFigure>
           <ProductPicture>

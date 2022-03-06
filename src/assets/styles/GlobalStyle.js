@@ -41,6 +41,11 @@ a, button {
   src: url("../../fonts/Barlow-black.ttf") format("ttf");
 }
 
+@font-face {
+  font-family: 'Roboto Slab', serif;
+  src: url("../../fonts/RobotoSlab-Black") format("ttf");
+}
+
 a,
 p,
 span,
@@ -52,7 +57,7 @@ h4,
 h5,
 h6 {
   margin: 0;
-  color: $text-color;
+  color: #041e42;
 }
 
 section{
@@ -66,14 +71,15 @@ p {
   font-size: 1.4rem;
   letter-spacing: 0.08em;
   line-height: 2.5rem;
-  font-family: $primary-font;
+  font-family: "Barlow";
   margin-bottom: 2rem;
+  font-weight: 500;
 
-  @include media-breakpoint-up(lg) {
-    font-size: 1.7rem;
+  ${media.lg`
+  font-size: 1.7rem;
     line-height: 2.9rem;
     margin-bottom: 4rem;
-  }
+  `}
 
   &:last-of-type {
     margin-bottom: 0;
@@ -86,73 +92,122 @@ li {
   font-size: 1.4rem;
   letter-spacing: 0.08em;
   line-height: 2.5rem;
-  font-family: $primary-font;
-  color: $text-color;
+  font-family: "Barlow";
+  color: #041e42;
 
-  @include media-breakpoint-up(lg) {
-    font-size: 1.7rem;
-    line-height: 2.9rem;
-  }
+  ${media.lg`
+   font-size: 1.7rem;
+   line-height: 2.9rem;
+  `}
+
 }
 h1,
 .h1 {
-  font-family: $secondary-font;
+  font-family: 'Roboto Slab', serif;
   font-weight: 800;
   letter-spacing: 0.024em;
   font-size: 2.6rem;
   line-height: 2.7rem;
   margin: 0;
   text-transform: none;
-  @include media-breakpoint-up(lg) {
-    line-height: 6.7rem;
-    font-size: 5.6rem;
-  }
+
+  ${media.lg`
+  line-height: 6.7rem;
+  font-size: 4rem;
+  `}
+ 
 }
 
 h2,
 .h2 {
+  font-family: "Barlow";
   font-size: 2rem;
   line-height: 2.6rem;
-  font-family: $primary-font;
   letter-spacing: 0.072em;
   margin-bottom: 2rem;
   text-transform: uppercase;
 
-  @include media-breakpoint-up(lg) {
+  ${media.lg`
     line-height: 3.4rem;
     font-size: 2.6rem;
     margin-bottom: 3rem;
-  }
-}
-.filter-heading {
-  position: relative;
-  padding-bottom: 1rem;
+  `}
 
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 0.2rem;
-    width: 9rem;
-    background: $secondary;
-  }
 }
+
 h3,
 h4,
 h5 {
   font-size: 1.4rem;
-  font-family: $primary-font;
+  font-family: "Barlow";
   letter-spacing: 0.08em;
   line-height: 1.9rem;
   margin-bottom: 1.5rem;
   text-transform: uppercase;
 
-  @include media-breakpoint-up(lg) {
+  ${media.lg`
     font-size: 1.7rem;
     line-height: 2.9rem;
     margin-bottom: 2rem;
-  }
+  `}
+}
+
+label,
+textarea {
+	letter-spacing: 0.08em;
+	font-size: 1.7rem;
+	display: inline-block;
+  font-family: "Barlow";
+	pointer-events: none;
+	line-height: 2.9rem;
+
+  ${media.md`
+		font-size: 1.5rem;
+	`}
+
+}
+
+textarea {
+	resize: none;
+	overflow: visible;
+	min-height: 15rem;
+	border: none;
+	background-color: transparent;
+	pointer-events: initial;
+}
+
+select {
+	color: ${({ theme }) => theme.colors.primary};
+	appearance: none;
+	width: 100%;
+	letter-spacing: 0.08em;
+	font-size: 1.7rem;
+	display: inline-block;
+  font-family: "Barlow";
+	color: ${({ theme }) => theme.colors.black};
+	line-height: 2.9rem;
+
+  ${media.md`
+		font-size: 1.5rem;
+	`}
+}
+
+input:not([type='checkbox']),
+select {
+	cursor: text;
+	outline: none;
+	padding: .5rem 1.5rem;
+	width: 100%;
+  font-family: "Barlow";
+	letter-spacing: 0.06em;
+	border: none;
+	border: .1rem solid ${({ theme }) => theme.colors.borderColor};
+  margin-bottom: 1rem;
+  cursor: pointer;
+
+  ${media.sm`
+  margin-bottom: 0rem;
+	`}
 }
 
 `;

@@ -10,8 +10,10 @@ import {
   SummaryContent,
   SummaryWrapper,
   BasketProductsWrapper,
+  BasketLink,
 } from './ShoppingCard.styles';
 import { useDispatch } from 'react-redux';
+import { ProductsSection } from 'views/Products/Products.styles';
 
 const ShoppingCard = () => {
   const { basketProducts, price } = useSelector(
@@ -28,38 +30,44 @@ const ShoppingCard = () => {
   return (
     <MainTemplate>
       <Container>
-        {!basketProducts.length ? (
-          <h2>Przykro mi, ale nie posaidasz żadnych produktóow w koszyku :(</h2>
-        ) : (
-          <Row>
-            <Col lg="7">
-              <BasketProductsWrapper>
-                <h2>Wybrane produkty</h2>
-                <button onClick={handleRemoveProducts}>Wyczyść koszyk</button>
-                {basketProducts.map((basketProduct) => (
-                  <BasketProduct basketProduct={basketProduct} />
-                ))}
-              </BasketProductsWrapper>
-            </Col>
-            <Col lg="4" lgOffset="1">
-              <SummaryWrapper>
-                <Button>Przejdź do logowania</Button>
-                <SummaryTitle>Podsumowanie</SummaryTitle>
-                <SummaryContent>
-                  <h3>Cena za produkty</h3>
-                  <h3>{price},00 zł</h3>
-                </SummaryContent>
-                <SummaryContent>
-                  <h3>Łączna kwota</h3>
-                  <h3>{price},00 zł</h3>
-                </SummaryContent>
+        <ProductsSection>
+          {!basketProducts.length ? (
+            <h2>
+              Przykro mi, ale nie posaidasz żadnych produktóow w koszyku :(
+            </h2>
+          ) : (
+            <Row>
+              <Col lg="7">
+                <BasketProductsWrapper>
+                  <h2>Wybrane produkty</h2>
+                  <BasketLink onClick={handleRemoveProducts}>
+                    Wyczyść koszyk
+                  </BasketLink>
+                  {basketProducts.map((basketProduct) => (
+                    <BasketProduct basketProduct={basketProduct} />
+                  ))}
+                </BasketProductsWrapper>
+              </Col>
+              <Col lg="4" lgOffset="1">
+                <SummaryWrapper>
+                  <Button>Przejdź do logowania</Button>
+                  <SummaryTitle>Podsumowanie</SummaryTitle>
+                  <SummaryContent>
+                    <h3>Cena za produkty</h3>
+                    <h3>{price},00 zł</h3>
+                  </SummaryContent>
+                  <SummaryContent>
+                    <h3>Łączna kwota</h3>
+                    <h3>{price},00 zł</h3>
+                  </SummaryContent>
 
-                <Button to="/next">Przejdź do dostawy i płatności </Button>
-              </SummaryWrapper>
-            </Col>
-          </Row>
-        )}
-        <h3>Darmowa dostawa !</h3>
+                  <Button to="/next">Przejdź do dostawy i płatności </Button>
+                </SummaryWrapper>
+              </Col>
+            </Row>
+          )}
+          <h3>Darmowa dostawa !</h3>
+        </ProductsSection>
       </Container>
     </MainTemplate>
   );
