@@ -1,7 +1,11 @@
-import { media } from 'styled-bootstrap-grid';
-import { createGlobalStyle } from 'styled-components';
+import {
+  media
+} from 'styled-bootstrap-grid';
+import {
+  createGlobalStyle
+} from 'styled-components';
 
-export const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle `
   
  
   
@@ -34,16 +38,6 @@ a, button {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-@font-face {
-  font-family: "Barlow";
-  src: url("../../fonts/Barlow-black.ttf") format("ttf");
-}
-
-@font-face {
-  font-family: 'Roboto Slab', serif;
-  src: url("../../fonts/RobotoSlab-Black") format("ttf");
 }
 
 a,
