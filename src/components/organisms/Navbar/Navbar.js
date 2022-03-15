@@ -3,7 +3,8 @@ import { useLocation } from 'react-router-dom';
 import { ReactComponent as Home } from 'assets/icons/home.svg';
 import { ReactComponent as Contact } from 'assets/icons/contact.svg';
 import { ReactComponent as Realizations } from 'assets/icons/realizations.svg';
-import shop from 'assets/icons/shop.png';
+import { ReactComponent as Shop } from 'assets/icons/shop.svg';
+
 import mainLogo from 'assets/icons/mainLogo.png';
 
 import {
@@ -88,7 +89,7 @@ const Navbar = () => {
                 <MenuListItem>
                   <MenuListLink to="/produkty">
                     <MenuListLinkIcon>
-                      <img src={shop} alt="ikona sklepu" />
+                      <Shop alt="ikona sklepu" />
                     </MenuListLinkIcon>
                     sklep
                   </MenuListLink>
