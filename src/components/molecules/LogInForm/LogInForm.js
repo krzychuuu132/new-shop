@@ -86,7 +86,7 @@ const LogInForm = ({ isLogIn }) => {
       } else {
         const { token, userId, tokenExpiration } = response.login;
         addAuthData(token, userId, tokenExpiration);
-        await navigate('/');
+        //await navigate('/');
       }
     } catch (err) {
       console.log(err);
