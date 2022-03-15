@@ -45,7 +45,11 @@ const ProductDetails = () => {
     if (attributes.length > 0) newProduct.size = productSize;
     newProduct.quantity = productQuantity;
 
-    const productExist = basketProducts.find((product) => product.id === id);
+    const productExist = newProduct.hasOwnProperty('size')
+      ? basketProducts.find(
+          (product) => product.id === id && product.size === productSize
+        )
+      : basketProducts.find((product) => product.id === id);
 
     if (productExist) {
       return (
@@ -60,8 +64,8 @@ const ProductDetails = () => {
 
     dispatch({ type: 'ADD_TO_SHOPPING_CARD', product: newProduct });
     dispatch({ type: 'CHANGE_PRICE' });
-    setProductSize('');
-    setProductQuantity('');
+    //  setProductSize('');
+    // setProductQuantity('');
   };
 
   const removeHTMLTags = (str) => {
@@ -84,7 +88,7 @@ const ProductDetails = () => {
                   ))}
                 </ProductDetailsImage>
               </Col>
-              <Col lg="7" offset="1">
+              <Col lg="7" lgOffset="1">
                 <ProductsDetailsContent>
                   <h2>{name}</h2>
                   <p>{removeHTMLTags(description)}</p>

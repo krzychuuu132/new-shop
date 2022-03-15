@@ -66,7 +66,7 @@ const LogInForm = ({ isLogIn }) => {
   } = useForm();
 
   const { addAuthData, jwt } = useContext(AuthContext);
-  //console.log(data2.login.error);
+
   const onSubmit = async (data) => {
     try {
       const { data: response } = await sendData({
@@ -86,7 +86,7 @@ const LogInForm = ({ isLogIn }) => {
       } else {
         const { token, userId, tokenExpiration } = response.login;
         addAuthData(token, userId, tokenExpiration);
-        navigate('/');
+        //await navigate('/');
       }
     } catch (err) {
       console.log(err);

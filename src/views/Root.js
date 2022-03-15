@@ -20,6 +20,8 @@ import store from 'store';
 import ProductDetails from './ProductDetails/ProductDetails';
 import ShoppingCard from './ShoppingCard/ShoppingCard';
 import ShortBasketProvider from 'providers/ShortBasketProvider';
+import Account from './Account/Account';
+import Order from './Order/Order';
 
 const Root = () => {
   return (
@@ -29,8 +31,8 @@ const Root = () => {
           <GridThemeProvider gridTheme={gridTheme}>
             <GlobalStyle />
             <MainTemplate>
-              <IsAuthProvider>
-                <ShortBasketProvider>
+              <ShortBasketProvider>
+                <IsAuthProvider>
                   <Wrapper>
                     <Routes>
                       <Route path="/" element={<Homepage />} />
@@ -50,10 +52,12 @@ const Root = () => {
                         element={<Products />}
                       />
                       <Route path="/koszyk" element={<ShoppingCard />} />
+                      <Route path="/moje-konto" element={<Account />} />
+                      <Route path="/zamowienie" element={<Order />} />
                     </Routes>
                   </Wrapper>
-                </ShortBasketProvider>
-              </IsAuthProvider>
+                </IsAuthProvider>
+              </ShortBasketProvider>
             </MainTemplate>
           </GridThemeProvider>
         </ThemeProvider>

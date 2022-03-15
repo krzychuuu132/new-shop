@@ -84,6 +84,18 @@ const resolvers = {
       throw new Error(err);
     }
   },
+
+  account: async (args) => {
+    try {
+      const user = await User.findById(args.id);
+
+      if (!user) throw new Error('Użytkownik nie istnieje!');
+
+      return user;
+    } catch (err) {
+      throw new Error(err);
+    }
+  },
 };
 
 module.exports = resolvers;

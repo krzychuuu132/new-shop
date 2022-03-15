@@ -25,10 +25,9 @@ const IsAuthProvider = ({ children }) => {
         jwt: authData.jwt,
         userId: authData.userId,
         tokenExpiration: authData.tokenExpiration,
-        addAuthData,
+        addAuthData: addAuthData,
       }}
     >
-      {authData.jwt ? authData.jwt : ''}
       {children}
     </AuthContext.Provider>
   );
