@@ -17,7 +17,6 @@ html {
 body {
   font-family: "Barlow";
   overflow-x: hidden;
-  padding-bottom: 15rem;
   padding-top: 7.82rem;
 
   ${media.md`

@@ -6,6 +6,11 @@ import ImgLeft from 'components/molecules/ImgLeft/ImgLeft';
 import ImgLeftPicture from 'assets/homepage/slider/about-as.jpg';
 import { Container } from 'styled-bootstrap-grid';
 import ImgRight from 'components/molecules/ImgRight/ImgRight';
+import Footer from 'components/organisms/Footer/Footer';
+import Offer from 'components/organisms/Offer/Offer';
+
+import OfferPicture from 'assets/homepage/offer/offer_image.png';
+import OfferBackround from 'assets/homepage/offer/offer_background.jpg';
 
 const Homepage = (props) => {
   return (
@@ -17,12 +22,15 @@ const Homepage = (props) => {
           alt="Zdjęcie o naszym slepie"
           content="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium voluptatem reprehenderit eveniet necessitatibus possimus perferendis ipsam, consequuntur delectus laboriosam est rerum, nisi porro odit doloribus repellendus beatae exercitationem ipsum quaerat."
         />
+        <Offer picture={OfferPicture} background={OfferBackround} />
         <ImgRight
           src={ImgLeftPicture}
           alt="Zdjęcie o naszym slepie"
           content="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium voluptatem reprehenderit eveniet necessitatibus possimus perferendis ipsam, consequuntur delectus laboriosam est rerum, nisi porro odit doloribus repellendus beatae exercitationem ipsum quaerat."
+          paddingTop={false}
         />
       </Container>
+      <Footer />
     </MainTemplate>
   );
 };

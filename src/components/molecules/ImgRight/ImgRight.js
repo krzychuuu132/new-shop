@@ -8,12 +8,13 @@ import {
   ImgLeftPicture,
   Wrapper,
 } from '../ImgLeft/ImgLeft.styles';
-import { Section } from 'components/atoms/Section/Section.styles';
+import Section from 'components/atoms/Section/Section';
 
-const ImgRight = ({ src, alt, content }) => {
+const ImgRight = ({ src, alt, content, paddingTop }) => {
+  console.log(paddingTop);
   return (
     <Wrapper>
-      <Section>
+      <Section paddingTop={paddingTop}>
         <Row>
           <Col lg="5">
             <ImgLeftContent>
