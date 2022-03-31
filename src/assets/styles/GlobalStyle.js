@@ -108,11 +108,13 @@ h1,
   font-size: 2.6rem;
   line-height: 2.7rem;
   margin: 0;
+  margin-bottom: 4rem;
   text-transform: none;
 
   ${media.lg`
   line-height: 6.7rem;
   font-size: 4rem;
+  margin-bottom: 6rem;
   `}
  
 }

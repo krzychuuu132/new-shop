@@ -11,7 +11,6 @@ import {
 import Section from 'components/atoms/Section/Section';
 
 const ImgRight = ({ src, alt, content, paddingTop }) => {
-  console.log(paddingTop);
   return (
     <Wrapper>
       <Section paddingTop={paddingTop}>

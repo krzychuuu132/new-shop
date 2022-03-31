@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: auto;
+  grid-template-columns: repeat(2, 1fr);
   justify-content: center;
   align-items: center;
   margin-top: 3rem;
@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   margin-top: 5rem;
   `}
 
-  ${media.sm`
+  ${media.md`
   grid-template-columns: repeat(3,1fr);
   `}
   ${media.lg`

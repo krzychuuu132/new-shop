@@ -9,7 +9,6 @@ const Section = ({
   backgroundImage: background,
   darkSection = false,
 }) => {
-  console.log(darkSection);
   return (
     <StyledSection
       paddingTop={paddingTop}
