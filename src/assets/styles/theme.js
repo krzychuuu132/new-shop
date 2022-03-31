@@ -6,6 +6,7 @@ export const theme = {
     borderColor: '#e8e7e7',
     black: '#161615',
     grayBckgr: '#f2f2f2',
+    white: '#fff',
   },
 
   transition: {

@@ -8,7 +8,7 @@ import {
   ImgLeftPicture,
   Wrapper,
 } from './ImgLeft.styles';
-import { Section } from 'components/atoms/Section/Section.styles';
+import Section from 'components/atoms/Section/Section';
 
 const ImgLeft = ({ src, alt, content }) => {
   return (
