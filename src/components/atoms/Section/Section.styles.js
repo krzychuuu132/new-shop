@@ -10,8 +10,20 @@ export const Section = styled.section`
   position: relative;
   color: white;
 
-  &::before {
+  &::after {
     content: '';
+    display: ${({ darkSection }) => (darkSection ? 'block' : 'none')};
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f2f2f2;
+    z-index: -2;
+  }
+
+  &::before {
+    content: ${({ backgroundImage }) => (backgroundImage ? '' : null)};
     position: absolute;
     top: 0;
     left: 0;
@@ -25,7 +37,7 @@ export const Section = styled.section`
   h2 {
     z-index: 1;
     position: relative;
-    color: white;
+    color: ${({ backgroundImage }) => (backgroundImage ? '#fff' : '#041e42')};
   }
 
   .section-image {

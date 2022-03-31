@@ -6,14 +6,19 @@ const Section = ({
   children,
   paddingTop = true,
   paddingBottom = true,
-  background,
+  backgroundImage: background,
+  darkSection = false,
 }) => {
+  console.log(darkSection);
   return (
     <StyledSection
       paddingTop={paddingTop}
       paddingBottom={paddingBottom}
-      background={background}
-      style={{ backgroundImage: background ? `url(${background})` : null }}>
+      backgroundImage={background}
+      darkSection={darkSection}
+      style={{
+        backgroundImage: background ? `url(${background})` : null,
+      }}>
       {children}
     </StyledSection>
   );

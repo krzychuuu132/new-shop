@@ -1,7 +1,7 @@
-import ButtonLink from 'components/atoms/ButtonLink/ButtonLink';
 import { media } from 'styled-bootstrap-grid';
 import styled from 'styled-components';
 import { MenuIcon } from '../Navbar/Navbar.styles';
+import ButtonLink from 'components/atoms/ButtonLink/ButtonLink';
 
 const StyledFooter = styled.footer`
   padding: 4rem 0;
@@ -12,7 +12,7 @@ const StyledFooter = styled.footer`
   );
 
   ${media.xl`
-    padding: 8rem 0 15rem 0
+    padding: 8rem 0 10rem 0
   `}
 `;
 

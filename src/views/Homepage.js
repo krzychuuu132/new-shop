@@ -11,6 +11,7 @@ import Offer from 'components/organisms/Offer/Offer';
 
 import OfferPicture from 'assets/homepage/offer/offer_image.png';
 import OfferBackround from 'assets/homepage/offer/offer_background.jpg';
+import Features from 'components/organisms/Features/Features';
 
 const Homepage = (props) => {
   return (
@@ -22,14 +23,17 @@ const Homepage = (props) => {
           alt="Zdjęcie o naszym slepie"
           content="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium voluptatem reprehenderit eveniet necessitatibus possimus perferendis ipsam, consequuntur delectus laboriosam est rerum, nisi porro odit doloribus repellendus beatae exercitationem ipsum quaerat."
         />
-        <Offer picture={OfferPicture} background={OfferBackround} />
+      </Container>
+      <Features />
+
+      <Container>
         <ImgRight
           src={ImgLeftPicture}
           alt="Zdjęcie o naszym slepie"
           content="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium voluptatem reprehenderit eveniet necessitatibus possimus perferendis ipsam, consequuntur delectus laboriosam est rerum, nisi porro odit doloribus repellendus beatae exercitationem ipsum quaerat."
-          paddingTop={false}
         />
       </Container>
+      <Offer picture={OfferPicture} backgroundImage={OfferBackround} />
       <Footer />
     </MainTemplate>
   );

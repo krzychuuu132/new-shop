@@ -4,9 +4,9 @@ import Section from 'components/atoms/Section/Section';
 import { Col, Container, Row } from 'styled-bootstrap-grid';
 import { Description, Title } from './Offer.styles';
 
-const Offer = ({ picture, background }) => {
+const Offer = ({ picture, backgroundImage }) => {
   return (
-    <Section background={background}>
+    <Section backgroundImage={backgroundImage}>
       <Container>
         <Row alignItems="center">
           <Col xl="7">
