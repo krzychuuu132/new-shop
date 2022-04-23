@@ -35,16 +35,6 @@ a, button {
   box-sizing: border-box;
 }
 
-@font-face {
-  font-family: "Barlow";
-  src: url("../../fonts/Barlow-black.ttf") format("ttf");
-}
-
-@font-face {
-  font-family: 'Roboto Slab', serif;
-  src: url("../../fonts/RobotoSlab-Black") format("ttf");
-}
-
 a,
 p,
 span,
