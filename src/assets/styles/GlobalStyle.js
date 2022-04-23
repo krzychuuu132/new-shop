@@ -20,7 +20,7 @@ body {
   padding-top: 7.82rem;
 
   ${media.md`
-  padding-top: 10.9rem;
+  padding-top: 10rem;
   `}
 }
 
@@ -153,21 +153,6 @@ h5 {
   `}
 }
 
-label,
-textarea {
-	letter-spacing: 0.08em;
-	font-size: 1.7rem;
-	display: inline-block;
-  font-family: "Barlow";
-	pointer-events: none;
-	line-height: 2.9rem;
-
-  ${media.md`
-		font-size: 1.5rem;
-	`}
-
-}
-
 textarea {
 	resize: none;
 	overflow: visible;
@@ -190,24 +175,6 @@ select {
 
   ${media.md`
 		font-size: 1.5rem;
-	`}
-}
-
-input:not([type='checkbox']),
-select {
-	cursor: text;
-	outline: none;
-	padding: .5rem 1.5rem;
-	width: 100%;
-  font-family: "Barlow";
-	letter-spacing: 0.06em;
-	border: none;
-	border: .1rem solid ${({ theme }) => theme.colors.borderColor};
-  margin-bottom: 1rem;
-  cursor: pointer;
-
-  ${media.sm`
-  margin-bottom: 0rem;
 	`}
 }
 

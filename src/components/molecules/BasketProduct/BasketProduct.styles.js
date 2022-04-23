@@ -42,6 +42,8 @@ const ProductDetails = styled.div`
     img {
       max-width: 2rem;
       transition: ${({ theme }) => theme.transition.primary};
+      backface-visibility: hidden;
+      will-change: opacity;
 
       &:hover {
         opacity: 0.5;

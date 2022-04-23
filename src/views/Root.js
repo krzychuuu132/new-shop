@@ -43,14 +43,8 @@ const Root = () => {
                       <Route path="/zaloguj" element={<LogIn />} />
                       <Route path="/rejestracja" element={<Register />} />
                       <Route path="/produkty" element={<Products />} />
-                      <Route
-                        path="/produkty/:id"
-                        element={<ProductDetails />}
-                      />
-                      <Route
-                        path="/produkty/category=:id"
-                        element={<Products />}
-                      />
+                      <Route path="/produkty/:id" element={<ProductDetails />} />
+                      <Route path="/produkty/category=:id" element={<Products />} />
                       <Route path="/koszyk" element={<ShoppingCard />} />
                       <Route path="/moje-konto" element={<Account />} />
                       <Route path="/zamowienie" element={<Order />} />

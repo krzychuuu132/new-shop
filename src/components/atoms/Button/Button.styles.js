@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import arrowIcon from 'assets/icons/arrow.svg';
-import { Link } from 'react-router-dom';
+import { media } from 'styled-bootstrap-grid';
 
 export const ButtonText = styled.span`
   will-change: transform;
@@ -25,14 +25,16 @@ export const ButtonStyles = css`
     color: white;
   }
 
-  &:hover::after {
-    transform: translateX(1rem);
-    opacity: 0;
-  }
+  ${media.xl`
+    &:hover::after {
+      transform: translateX(1rem);
+      opacity: 0;
+    }
 
-  &:hover ${ButtonText} {
-    transform: translateX(-1rem);
-  }
+    &:hover ${ButtonText} {
+      transform: translateX(-1rem);
+    }
+  `}
 
   &::after {
     content: url(${arrowIcon});

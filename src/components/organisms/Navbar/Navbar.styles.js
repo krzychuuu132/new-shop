@@ -76,7 +76,7 @@ const MenuHamburger = styled.button`
   border: none;
   width: 2.3rem;
   height: 1.9rem;
-  display: flex;
+  display: ${({ isAuth }) => (isAuth ? 'none' : 'flex')};
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
@@ -289,23 +289,4 @@ const MenuLanguagesItem = styled.button`
   }
 `;
 
-export {
-  Navigation,
-  Logo,
-  LogoMain,
-  StyledLink,
-  MenuIcon,
-  MenuHamburger,
-  MenuHamburgerItem,
-  Menu,
-  MenuNavbar,
-  MenuNavbarContainer,
-  MenuContent,
-  MenuList,
-  MenuListItem,
-  MenuListLink,
-  MenuListLinkIcon,
-  MenuLanguages,
-  MenuLanguagesItem,
-  NavigationWrapper,
-};
+export { Navigation, Logo, LogoMain, StyledLink, MenuIcon, MenuHamburger, MenuHamburgerItem, Menu, MenuNavbar, MenuNavbarContainer, MenuContent, MenuList, MenuListItem, MenuListLink, MenuListLinkIcon, MenuLanguages, MenuLanguagesItem, NavigationWrapper };
