@@ -49,7 +49,7 @@ const Navbar = () => {
               <MenuIcon src={mainLogo} alt="ikona menu" />
             </StyledLink>
           </LogoMain>
-          <MenuHamburger onClick={handleSetActiveMenu} activeMenu={activeMenu}>
+          <MenuHamburger onClick={handleSetActiveMenu} activeMenu={activeMenu} isAuth={authorizationMenu(pathname)}>
             <MenuHamburgerItem activeMenu={activeMenu} />
           </MenuHamburger>
           <Menu activeMenu={activeMenu}>
@@ -96,7 +96,7 @@ const Navbar = () => {
                 </MenuListItem>
 
                 <MenuListItem>
-                  <MenuListLink to="/">
+                  <MenuListLink to="/contact">
                     <MenuListLinkIcon>
                       <Contact alt="ikona kontaktu" />
                     </MenuListLinkIcon>

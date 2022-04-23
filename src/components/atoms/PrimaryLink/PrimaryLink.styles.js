@@ -9,6 +9,7 @@ export const StyledLink = styled(Link)`
   font-size: 1.6rem;
   line-height: 2.5rem;
   transition: ${({ theme }) => theme.transition.primary};
+  will-change: opacity;
   display: block;
 
   ${media.xl`

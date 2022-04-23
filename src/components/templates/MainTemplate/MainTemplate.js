@@ -43,9 +43,7 @@ const MainTemplate = ({ children }) => {
   return (
     <Wrapper>
       <Navbar />
-
       {children}
-
       <ShortBasket />
     </Wrapper>
   );

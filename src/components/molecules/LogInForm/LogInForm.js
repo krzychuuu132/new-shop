@@ -2,8 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Section } from 'components/atoms/Section/Section.styles';
 import { Col, Container, Row } from 'styled-bootstrap-grid';
-import { Label } from 'components/atoms/Label/Label.styles';
-import { Input, InputWrapper } from 'components/atoms/Input/Input.styles';
+import Input from 'components/atoms/Input/Input';
 import Button from 'components/atoms/Button/Button';
 import DontHaveAccount from '../DontHaveAccount/DontHaveAccount';
 import Form from 'components/atoms/Form/Form';
@@ -41,8 +40,7 @@ const REGISTER_USER = gql`
 `;
 
 const LogInForm = ({ isLogIn }) => {
-  const [sendData, { loading, error, data: data2 }] =
-    useLazyQuery(REGISTER_USER);
+  const [sendData, { loading, error, data: data2 }] = useLazyQuery(REGISTER_USER);
 
   let navigate = useNavigate();
 
@@ -100,36 +98,30 @@ const LogInForm = ({ isLogIn }) => {
         <Row>
           <Col md={6}>
             <Form onSubmit={handleSubmit(onSubmit)}>
-              <InputWrapper>
-                <Label>Podaj email:</Label>
-                <Input
-                  type="text"
-                  placeholder="Wprowadź adres e-mail"
-                  {...register('email', {
-                    required: emailRequired,
-                    minLength: { value: 5, message: emailMinLength },
-                    maxLength: 20,
-                  })}
-                />
-                <ErrorMessage message={errors.email} />
-              </InputWrapper>
-              <InputWrapper>
-                <Label>Podaj hasło:</Label>
-                <Input
-                  type="password"
-                  placeholder="Wprowadź hasło"
-                  {...register('password', {
-                    required: passwordRequired,
-                    minLength: { value: 5, message: passwordMinLength },
-                    maxLength: 20,
-                  })}
-                />
-              </InputWrapper>
+              <Input
+                type="text"
+                placeholder="Wprowadź adres e-mail"
+                {...register('email', {
+                  required: emailRequired,
+                  minLength: { value: 5, message: emailMinLength },
+                  maxLength: 20,
+                })}
+              />
+              <ErrorMessage message={errors.email} />
+              <Input
+                type="password"
+                placeholder="Wprowadź hasło"
+                {...register('password', {
+                  required: passwordRequired,
+                  minLength: { value: 5, message: passwordMinLength },
+                  maxLength: 20,
+                })}
+              />
               <ErrorMessage message={errors.password} />
               <Button type="submit">Zaloguj się</Button>
             </Form>
           </Col>
-          <Col md={6}>
+          <Col md={5} mdOffset={1} xl={4} xlOffset={2}>
             <DontHaveAccount isLogIn={isLogIn} />
           </Col>
         </Row>

@@ -5,29 +5,31 @@ import { authLayout } from 'helpers/authLayout';
 import LogInForm from 'components/molecules/LogInForm/LogInForm';
 import RegisterForm from 'components/molecules/RegisterForm/RegisterForm';
 import gsap from 'gsap/all';
+import Footer from 'components/organisms/Footer/Footer';
+import Breadcrumb from 'components/molecules/Breadcrumb/Breadcrumb';
+import Section from 'components/atoms/Section/Section';
+import { Container } from 'styled-bootstrap-grid';
 
 const AuthTemplate = () => {
   let location = useLocation();
   const authWrapperRef = useRef(null);
 
   useEffect(() => {
-    gsap.fromTo(
-      authWrapperRef.current,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.4, ease: 'ease-in-out' }
-    );
+    gsap.fromTo(authWrapperRef.current, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: 'ease-in-out' });
   }, []);
 
   const { pathname } = location;
 
   return (
-    <Wrapper ref={authWrapperRef}>
-      {authLayout(pathname) ? (
-        <LogInForm isLogIn={authLayout(pathname)} />
-      ) : (
-        <RegisterForm isLogIn={authLayout(pathname)} />
-      )}
-    </Wrapper>
+    <>
+      <Container>
+        <Breadcrumb title="Zaloguj" />
+      </Container>
+      <Section ref={authWrapperRef}>
+        {authLayout(pathname) ? <LogInForm isLogIn={authLayout(pathname)} /> : <RegisterForm isLogIn={authLayout(pathname)} />}
+      </Section>
+      <Footer />
+    </>
   );
 };
 

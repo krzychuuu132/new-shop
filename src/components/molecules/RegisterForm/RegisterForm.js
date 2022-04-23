@@ -4,18 +4,14 @@ import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 import { Section } from 'components/atoms/Section/Section.styles';
 import { Col, Container, Row } from 'styled-bootstrap-grid';
-import { Label } from 'components/atoms/Label/Label.styles';
 import { useNavigate } from 'react-router-dom';
 
-import {
-  Input,
-  InputWrapper,
-  CheckboxWrapper,
-} from 'components/atoms/Input/Input.styles';
+import Input from 'components/atoms/Input/Input';
 import { Button } from 'components/atoms/Button/Button.styles';
 import DontHaveAccount from '../DontHaveAccount/DontHaveAccount';
 import Form from 'components/atoms/Form/Form';
 import ErrorMessage from 'components/atoms/ErrorMessage/ErrorMessage';
+import { CheckboxWrapper } from 'components/atoms/Input/Input.styles';
 
 const errorMessages = {
   nameRequired: 'Pole Imię jest wymagane',
@@ -30,12 +26,7 @@ const errorMessages = {
 };
 
 const REGISTER_USER = gql`
-  mutation Register(
-    $name: String!
-    $surname: String!
-    $email: String!
-    $password: String!
-  ) {
+  mutation Register($name: String!, $surname: String!, $email: String!, $password: String!) {
     register(name: $name, surname: $surname, email: $email, password: $password)
   }
 `;
@@ -64,8 +55,7 @@ const RegisterForm = ({ isLogIn }) => {
     setError,
   } = useForm();
 
-  const [sendData, { data: responseData, loading, error }] =
-    useMutation(REGISTER_USER);
+  const [sendData, { data: responseData, loading, error }] = useMutation(REGISTER_USER);
 
   const onSubmit = async (data) => {
     const { data: response } = await sendData({
@@ -82,8 +72,7 @@ const RegisterForm = ({ isLogIn }) => {
         type: 'manual',
         message: response.register,
       });
-    } else
-      return setCreatedUser(true), setTimeout(() => navigate('/zaloguj'), 3000);
+    } else return setCreatedUser(true), setTimeout(() => navigate('/zaloguj'), 3000);
   };
 
   return (
@@ -91,78 +80,61 @@ const RegisterForm = ({ isLogIn }) => {
       <Container>
         <h1 className="h1">Zarejestruj się</h1>
         <Row>
-          <Col md={6}>
+          <Col md={7}>
             {!createdUser ? (
               <Form onSubmit={handleSubmit(onSubmit)}>
                 <Row>
                   <Col md={6}>
-                    <InputWrapper>
-                      <Label>Imię:*</Label>
-                      <Input
-                        type="text"
-                        placeholder="Wprowadź imię"
-                        {...register('name', {
-                          required: nameRequired,
-                          minLength: { value: 5, message: nameMinLength },
-                        })}
-                      />
-                      <ErrorMessage message={errors.name} />
-                    </InputWrapper>
+                    <Input
+                      type="text"
+                      placeholder="Wprowadź imię"
+                      {...register('name', {
+                        required: nameRequired,
+                        minLength: { value: 5, message: nameMinLength },
+                      })}
+                    />
+                    <ErrorMessage message={errors.name} isRegister={true} />
                   </Col>
                   <Col md={6}>
-                    <InputWrapper>
-                      <Label>Nazwisko:*</Label>
-                      <Input
-                        type="text"
-                        placeholder="Wprowadź nazwisko"
-                        {...register('surname', {
-                          required: surnameRequired,
-                          minLength: { value: 5, message: surnameMinLength },
-                          maxLength: 20,
-                        })}
-                      />
-                      <ErrorMessage message={errors.surname} />
-                    </InputWrapper>
+                    <Input
+                      type="text"
+                      placeholder="Wprowadź nazwisko"
+                      {...register('surname', {
+                        required: surnameRequired,
+                        minLength: { value: 5, message: surnameMinLength },
+                        maxLength: 20,
+                      })}
+                    />
+                    <ErrorMessage message={errors.surname} isRegister={true} />
                   </Col>
                   <Col md={12}>
-                    <InputWrapper>
-                      <Label>Email:*</Label>
-                      <Input
-                        type="email"
-                        placeholder="Wprowadź adres e-mail"
-                        {...register('email', {
-                          required: emailRequired,
-                          minLength: { value: 5, message: emailMinLength },
-                          maxLength: 20,
-                        })}
-                      />
-                      <ErrorMessage message={errors.email} />
-                    </InputWrapper>
+                    <Input
+                      type="email"
+                      placeholder="Wprowadź adres e-mail"
+                      {...register('email', {
+                        required: emailRequired,
+                        minLength: { value: 5, message: emailMinLength },
+                        maxLength: 20,
+                      })}
+                    />
+                    <ErrorMessage message={errors.email} isRegister={true} />
                   </Col>
                   <Col md={12}>
-                    <InputWrapper>
-                      <Label>Hasło:*</Label>
-                      <Input
-                        type="password"
-                        placeholder="Wprowadź hasło"
-                        {...register('password', {
-                          required: passwordRequired,
-                          minLength: { value: 5, message: passwordMinLength },
-                          maxLength: 20,
-                        })}
-                      />
-                      <ErrorMessage message={errors.password} />
-                    </InputWrapper>
+                    <Input
+                      type="password"
+                      placeholder="Wprowadź hasło"
+                      {...register('password', {
+                        required: passwordRequired,
+                        minLength: { value: 5, message: passwordMinLength },
+                        maxLength: 20,
+                      })}
+                    />
+                    <ErrorMessage message={errors.password} isRegister={true} />
                   </Col>
                   <Col md={12}>
                     <CheckboxWrapper>
-                      <Input
-                        type="checkbox"
-                        id="rodo"
-                        {...register('rodo', { required: rodoRequired })}
-                      />
-                      <Label htmlFor="rodo">Akceptuje regulamin sklepu*</Label>
-                      <ErrorMessage message={errors.rodo} />
+                      <Input type="checkbox" id="rodo" {...register('rodo', { required: rodoRequired })} placeholder="Akceptuję REGULAMIN sklepu*" />
+                      <ErrorMessage message={errors.rodo} isRegister={true} />
                     </CheckboxWrapper>
                   </Col>
                 </Row>
@@ -172,7 +144,7 @@ const RegisterForm = ({ isLogIn }) => {
               <p>Konto zostało stowrzone!</p>
             )}
           </Col>
-          <Col md={6}>
+          <Col md={4} xl={3} mdOffset={1} xlOffset={2}>
             <DontHaveAccount isLogIn={isLogIn} />
           </Col>
         </Row>

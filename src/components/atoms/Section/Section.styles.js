@@ -1,4 +1,4 @@
-import { media } from 'styled-bootstrap-grid';
+import { media, Row } from 'styled-bootstrap-grid';
 import styled from 'styled-components';
 
 export const Section = styled.section`
@@ -52,4 +52,8 @@ export const Section = styled.section`
     padding-top: ${({ paddingTop }) => (paddingTop ? '9rem' : '0')};
     padding-bottom: ${({ paddingBottom }) => (paddingBottom ? '9rem' : '0')};
   `}
+
+  ${Row} {
+    gap: 4rem 0;
+  }
 `;
