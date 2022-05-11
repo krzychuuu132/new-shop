@@ -66,6 +66,7 @@ const LogInForm = ({ isLogIn }) => {
   const { addAuthData, jwt } = useContext(AuthContext);
 
   const onSubmit = async (data) => {
+    console.log('errors');
     try {
       const { data: response } = await sendData({
         variables: {
@@ -101,6 +102,7 @@ const LogInForm = ({ isLogIn }) => {
               <Input
                 type="text"
                 placeholder="Wprowadź adres e-mail"
+                ref={null}
                 {...register('email', {
                   required: emailRequired,
                   minLength: { value: 5, message: emailMinLength },
@@ -111,6 +113,7 @@ const LogInForm = ({ isLogIn }) => {
               <Input
                 type="password"
                 placeholder="Wprowadź hasło"
+                ref={null}
                 {...register('password', {
                   required: passwordRequired,
                   minLength: { value: 5, message: passwordMinLength },

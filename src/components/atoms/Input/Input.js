@@ -4,6 +4,7 @@ import { Input as StyledInput, InputWrapper, Label } from './Input.styles';
 
 const Input = (props) => {
   const { placeholder, id } = props;
+  console.log(props);
   return (
     <InputWrapper>
       <StyledInput {...props} />

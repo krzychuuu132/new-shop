@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Wrapper } from './AuthTemplate.styles';
 import { authLayout } from 'helpers/authLayout';
 import LogInForm from 'components/molecules/LogInForm/LogInForm';
 import RegisterForm from 'components/molecules/RegisterForm/RegisterForm';
@@ -25,9 +24,7 @@ const AuthTemplate = () => {
       <Container>
         <Breadcrumb title="Zaloguj" />
       </Container>
-      <Section ref={authWrapperRef}>
-        {authLayout(pathname) ? <LogInForm isLogIn={authLayout(pathname)} /> : <RegisterForm isLogIn={authLayout(pathname)} />}
-      </Section>
+      <Section>{authLayout(pathname) ? <LogInForm isLogIn={authLayout(pathname)} /> : <RegisterForm isLogIn={authLayout(pathname)} />}</Section>
       <Footer />
     </>
   );
