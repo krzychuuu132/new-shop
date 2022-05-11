@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
@@ -36,6 +36,8 @@ const RegisterForm = ({ isLogIn }) => {
 
   let navigate = useNavigate();
 
+  const nameRef = useRef(null);
+
   const {
     nameRequired,
     nameMinLength,
@@ -56,6 +58,8 @@ const RegisterForm = ({ isLogIn }) => {
   } = useForm();
 
   const [sendData, { data: responseData, loading, error }] = useMutation(REGISTER_USER);
+
+  console.log(errors, 'działa');
 
   const onSubmit = async (data) => {
     const { data: response } = await sendData({
@@ -92,6 +96,7 @@ const RegisterForm = ({ isLogIn }) => {
                         required: nameRequired,
                         minLength: { value: 5, message: nameMinLength },
                       })}
+                      ref={nameRef}
                     />
                     <ErrorMessage message={errors.name} isRegister={true} />
                   </Col>
@@ -99,6 +104,7 @@ const RegisterForm = ({ isLogIn }) => {
                     <Input
                       type="text"
                       placeholder="Wprowadź nazwisko"
+                      forwardRef="surname"
                       {...register('surname', {
                         required: surnameRequired,
                         minLength: { value: 5, message: surnameMinLength },
@@ -111,6 +117,7 @@ const RegisterForm = ({ isLogIn }) => {
                     <Input
                       type="email"
                       placeholder="Wprowadź adres e-mail"
+                      forwardRef="email"
                       {...register('email', {
                         required: emailRequired,
                         minLength: { value: 5, message: emailMinLength },
@@ -123,6 +130,7 @@ const RegisterForm = ({ isLogIn }) => {
                     <Input
                       type="password"
                       placeholder="Wprowadź hasło"
+                      forwardRef="password"
                       {...register('password', {
                         required: passwordRequired,
                         minLength: { value: 5, message: passwordMinLength },
@@ -133,7 +141,13 @@ const RegisterForm = ({ isLogIn }) => {
                   </Col>
                   <Col md={12}>
                     <CheckboxWrapper>
-                      <Input type="checkbox" id="rodo" {...register('rodo', { required: rodoRequired })} placeholder="Akceptuję REGULAMIN sklepu*" />
+                      <Input
+                        type="checkbox"
+                        id="rodo"
+                        {...register('rodo', { required: rodoRequired })}
+                        placeholder="Akceptuję REGULAMIN sklepu*"
+                        forwardRef="rodo"
+                      />
                       <ErrorMessage message={errors.rodo} isRegister={true} />
                     </CheckboxWrapper>
                   </Col>
