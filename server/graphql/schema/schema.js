@@ -56,6 +56,7 @@ const schema = buildSchema(`
     users: [String!]!
     login(email:String!,password: String!): AuthData!
     products:[Product]
+    product(id: ID!): Product!
     categories:[Category!]!
     account(id: ID!): User!
   }

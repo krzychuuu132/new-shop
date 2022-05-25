@@ -1,13 +1,10 @@
 const User = require('../../models/User');
-const getProducts = require('../../utils/get-products');
+const { getProducts, getProduct } = require('../../utils/get-products');
 const getCatgories = require('../../utils/get-categories');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const resolvers = {
-  hello: () => {
-    return 'Hello world!';
-  },
   users: () => {
     return ['krzysiek', 'damian', 'filip'];
   },
@@ -15,6 +12,16 @@ const resolvers = {
   products: async () => {
     const products = await getProducts();
     return products;
+  },
+
+  product: async (req, res) => {
+    const { id } = req;
+    try {
+      const product = await getProduct(id);
+      return product;
+    } catch (err) {
+      return err;
+    }
   },
 
   categories: async () => {
@@ -40,13 +47,9 @@ const resolvers = {
           error: { type: 'password', message: 'hasło jest nieprawidłowe!' },
         };
 
-      const token = jwt.sign(
-        { userId: user.id, email: user.email },
-        'secretkey',
-        {
-          expiresIn: '1h',
-        }
-      );
+      const token = jwt.sign({ userId: user.id, email: user.email }, 'secretkey', {
+        expiresIn: '1h',
+      });
 
       return {
         userId: user.id,
