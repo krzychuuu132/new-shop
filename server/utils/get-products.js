@@ -27,4 +27,26 @@ const getProducts = async (req, res) => {
   }
 };
 
-module.exports = getProducts;
+const getProduct = async (req, res) => {
+  const responsData = {
+    success: false,
+    product: {},
+  };
+
+  try {
+    const { data } = await api.get('products', {
+      include: 21,
+    });
+    responsData.success = true;
+    responsData.product = data;
+    console.log(req, res);
+    return data[0];
+  } catch (err) {
+    responsData.error = err.message;
+  }
+};
+
+module.exports = {
+  getProducts,
+  getProduct,
+};
