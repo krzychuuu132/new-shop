@@ -162,7 +162,8 @@ select {
   font-family: "Barlow";
 	color: ${({ theme }) => theme.colors.black};
 	line-height: 2.9rem;
-
+  padding: 0 1rem;
+  
   ${media.md`
 		font-size: 1.5rem;
 	`}

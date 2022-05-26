@@ -59,8 +59,6 @@ const RegisterForm = ({ isLogIn }) => {
 
   const [sendData, { data: responseData, loading, error }] = useMutation(REGISTER_USER);
 
-  console.log(errors, 'działa');
-
   const onSubmit = async (data) => {
     const { data: response } = await sendData({
       variables: {

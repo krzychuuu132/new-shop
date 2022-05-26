@@ -15,7 +15,7 @@ import LogIn from './LogIn';
 import Register from './Register';
 import IsAuthProvider from 'providers/IsAuthProvider';
 import Products from './Products/Products';
-import { Provider, useDispatch } from 'react-redux';
+import { Provider } from 'react-redux';
 import store from 'store';
 import ProductDetails from './ProductDetails/ProductDetails';
 import ShoppingCard from './ShoppingCard/ShoppingCard';

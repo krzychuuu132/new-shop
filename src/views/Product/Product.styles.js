@@ -73,7 +73,8 @@ const ProductLinkWrapper = styled.div`
   }
 `;
 
-const ProductWrapper = styled.div`
+const ProductWrapper = styled(Link)`
+  text-decoration: none;
   &:hover ${ProductLinkWrapper} {
     transform: translateX(-50%) translateY(0rem);
     opacity: 1;

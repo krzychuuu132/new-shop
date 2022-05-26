@@ -26,8 +26,7 @@ const IsAuthProvider = ({ children }) => {
         userId: authData.userId,
         tokenExpiration: authData.tokenExpiration,
         addAuthData: addAuthData,
-      }}
-    >
+      }}>
       {children}
     </AuthContext.Provider>
   );

@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { authLayout } from 'helpers/authLayout';
 import LogInForm from 'components/molecules/LogInForm/LogInForm';
 import RegisterForm from 'components/molecules/RegisterForm/RegisterForm';
-import gsap from 'gsap/all';
+import gsap from 'gsap';
 import Footer from 'components/organisms/Footer/Footer';
 import Breadcrumb from 'components/molecules/Breadcrumb/Breadcrumb';
 import Section from 'components/atoms/Section/Section';
