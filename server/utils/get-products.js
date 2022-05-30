@@ -9,40 +9,22 @@ const api = new WooCommerceRestApi({
 });
 
 const getProducts = async (req, res) => {
-  const responsData = {
-    success: false,
-    products: [],
-  };
-
   try {
     const { data } = await api.get('products', { per_page: 50 });
-
-    responsData.success = true;
-    responsData.products = data;
-
     return data;
   } catch (err) {
-    responsData.error = err.message;
-    return responsData;
+    throw new Error(err);
   }
 };
 
 const getProduct = async (req, res) => {
-  const responsData = {
-    success: false,
-    product: {},
-  };
-
   try {
     const { data } = await api.get('products', {
       include: 21,
     });
-    responsData.success = true;
-    responsData.product = data;
-    console.log(req, res);
     return data[0];
   } catch (err) {
-    responsData.error = err.message;
+    throw new Error(err);
   }
 };
 

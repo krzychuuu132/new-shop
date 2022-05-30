@@ -6,7 +6,7 @@ import { Section } from 'components/atoms/Section/Section.styles';
 import { Col, Container, Row } from 'styled-bootstrap-grid';
 import { useNavigate } from 'react-router-dom';
 
-import Input from 'components/atoms/Input/Input';
+import { Input, Label } from 'components/atoms/Input/Input.styles';
 import { Button } from 'components/atoms/Button/Button.styles';
 import DontHaveAccount from '../DontHaveAccount/DontHaveAccount';
 import Form from 'components/atoms/Form/Form';
@@ -36,8 +36,6 @@ const RegisterForm = ({ isLogIn }) => {
 
   let navigate = useNavigate();
 
-  const nameRef = useRef(null);
-
   const {
     nameRequired,
     nameMinLength,
@@ -55,9 +53,12 @@ const RegisterForm = ({ isLogIn }) => {
     handleSubmit,
     formState: { errors },
     setError,
+    watch,
   } = useForm();
 
   const [sendData, { data: responseData, loading, error }] = useMutation(REGISTER_USER);
+
+  console.log(watch());
 
   const onSubmit = async (data) => {
     const { data: response } = await sendData({
@@ -68,7 +69,7 @@ const RegisterForm = ({ isLogIn }) => {
         password: data.password,
       },
     });
-
+    // IF EMAIL IS ALREADY EXIST IN DATABASE
     if (response.register) {
       return setError('email', {
         type: 'manual',
@@ -94,7 +95,6 @@ const RegisterForm = ({ isLogIn }) => {
                         required: nameRequired,
                         minLength: { value: 5, message: nameMinLength },
                       })}
-                      ref={nameRef}
                     />
                     <ErrorMessage message={errors.name} isRegister={true} />
                   </Col>
@@ -102,7 +102,6 @@ const RegisterForm = ({ isLogIn }) => {
                     <Input
                       type="text"
                       placeholder="Wprowadź nazwisko"
-                      forwardRef="surname"
                       {...register('surname', {
                         required: surnameRequired,
                         minLength: { value: 5, message: surnameMinLength },
@@ -115,7 +114,6 @@ const RegisterForm = ({ isLogIn }) => {
                     <Input
                       type="email"
                       placeholder="Wprowadź adres e-mail"
-                      forwardRef="email"
                       {...register('email', {
                         required: emailRequired,
                         minLength: { value: 5, message: emailMinLength },
@@ -128,7 +126,6 @@ const RegisterForm = ({ isLogIn }) => {
                     <Input
                       type="password"
                       placeholder="Wprowadź hasło"
-                      forwardRef="password"
                       {...register('password', {
                         required: passwordRequired,
                         minLength: { value: 5, message: passwordMinLength },
@@ -139,21 +136,16 @@ const RegisterForm = ({ isLogIn }) => {
                   </Col>
                   <Col md={12}>
                     <CheckboxWrapper>
-                      <Input
-                        type="checkbox"
-                        id="rodo"
-                        {...register('rodo', { required: rodoRequired })}
-                        placeholder="Akceptuję REGULAMIN sklepu*"
-                        forwardRef="rodo"
-                      />
-                      <ErrorMessage message={errors.rodo} isRegister={true} />
+                      <Input type="checkbox" id="rodo" {...register('rodo', { required: rodoRequired })} />
+                      <Label htmlFor="rodo">*Akceptuję REGULAMIN sklepu</Label>
                     </CheckboxWrapper>
+                    <ErrorMessage message={errors.rodo} isRegister={true} />
                   </Col>
                 </Row>
                 <Button type="submit">Zarejestruj się</Button>
               </Form>
             ) : (
-              <p>Konto zostało stowrzone!</p>
+              <h2>Konto zostało stworzone!</h2>
             )}
           </Col>
           <Col md={4} xl={3} mdOffset={1} xlOffset={2}>
