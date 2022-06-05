@@ -9,7 +9,7 @@ import Form from 'components/atoms/Form/Form';
 
 import { useForm } from 'react-hook-form';
 import ErrorMessage from 'components/atoms/ErrorMessage/ErrorMessage';
-import { gql, useLazyQuery, useMutation, useQuery } from '@apollo/client';
+import { gql, useLazyQuery } from '@apollo/client';
 import { AuthContext } from 'providers/IsAuthProvider';
 import { useNavigate } from 'react-router-dom';
 import { wait } from 'helpers/wait';
@@ -41,10 +41,7 @@ const REGISTER_USER = gql`
 `;
 
 const LogInForm = ({ isLogIn }) => {
-  const [loadingData, setLoadingData] = useState(true);
-  const [sendData, { loading, error }] = useLazyQuery(REGISTER_USER, {
-    onCompleted: (data) => setLoadingData(false),
-  });
+  const [sendData, { loading, error }] = useLazyQuery(REGISTER_USER);
 
   let navigate = useNavigate();
 
@@ -68,19 +65,17 @@ const LogInForm = ({ isLogIn }) => {
     clearErrors,
   } = useForm();
 
-  const { addAuthData, jwt } = useContext(AuthContext);
+  const { addAuthData } = useContext(AuthContext);
 
   const onSubmit = async (data) => {
-    console.log(loadingData);
     clearErrors();
     try {
-      const { data: response, data: test } = await sendData({
+      const { data: response } = await sendData({
         variables: {
           email: data.email,
           password: data.password,
         },
       });
-      console.log(test);
       if (response.login.error) {
         const { type, message } = response.login.error;
         setError(type, {
@@ -88,8 +83,8 @@ const LogInForm = ({ isLogIn }) => {
           message: message,
         });
       } else {
-        // const { token, userId, tokenExpiration } = response.login;
-        // addAuthData(token, userId, tokenExpiration);
+        const { token, userId, tokenExpiration } = response.login;
+        addAuthData(token, userId, tokenExpiration);
         await wait(() => navigate('/'), 1000);
       }
     } catch (err) {
@@ -100,8 +95,7 @@ const LogInForm = ({ isLogIn }) => {
   return (
     <Section>
       <Container>
-        <h1>Zaloguj się</h1>
-        {console.log(loadingData)}
+        <h1>Zaloguj się</h1>}
         <Row>
           <Col md={6}>
             <Form onSubmit={handleSubmit(onSubmit)}>
@@ -111,7 +105,7 @@ const LogInForm = ({ isLogIn }) => {
                 {...register('email', {
                   required: emailRequired,
                   minLength: { value: 5, message: emailMinLength },
-                  maxLength: 20,
+                  maxLength: 40,
                 })}
               />
               <ErrorMessage message={errors.email} />

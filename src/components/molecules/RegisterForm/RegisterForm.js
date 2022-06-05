@@ -58,8 +58,6 @@ const RegisterForm = ({ isLogIn }) => {
 
   const [sendData, { data: responseData, loading, error }] = useMutation(REGISTER_USER);
 
-  console.log(watch());
-
   const onSubmit = async (data) => {
     const { data: response } = await sendData({
       variables: {
@@ -75,7 +73,10 @@ const RegisterForm = ({ isLogIn }) => {
         type: 'manual',
         message: response.register,
       });
-    } else return setCreatedUser(true), setTimeout(() => navigate('/zaloguj'), 3000);
+    } else {
+      setCreatedUser(true);
+      setTimeout(() => navigate('/zaloguj'), 3000);
+    }
   };
 
   return (
@@ -117,7 +118,7 @@ const RegisterForm = ({ isLogIn }) => {
                       {...register('email', {
                         required: emailRequired,
                         minLength: { value: 5, message: emailMinLength },
-                        maxLength: 20,
+                        maxLength: 40,
                       })}
                     />
                     <ErrorMessage message={errors.email} isRegister={true} />
