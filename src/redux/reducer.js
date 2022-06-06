@@ -75,8 +75,12 @@ const shopActivitiesReducer = (state = shopActivities, action) => {
     }
     case types.CHANGE_ORDER_VALUES: {
       const { name, value } = action;
-      console.log(name, value);
-      return { ...state, orderDetails: (state.orderDetails[name] = value) };
+      const orderDetailsObjectCopy = Object.assign(state.orderDetails, {});
+      orderDetailsObjectCopy[name] = value;
+      return {
+        ...state,
+        orderDetails: orderDetailsObjectCopy,
+      };
     }
     default:
       return state;

@@ -17,10 +17,10 @@ const getProducts = async (req, res) => {
   }
 };
 
-const getProduct = async (req, res) => {
+const getProduct = async (id) => {
   try {
     const { data } = await api.get('products', {
-      include: 21,
+      include: id,
     });
     return data[0];
   } catch (err) {

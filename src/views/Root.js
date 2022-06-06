@@ -22,6 +22,7 @@ import ShoppingCard from './ShoppingCard/ShoppingCard';
 import ShortBasketProvider from 'providers/ShortBasketProvider';
 import Account from './Account/Account';
 import Order from './Order/Order';
+import Summary from './Summary/Summary';
 
 const Root = () => {
   return (
@@ -48,6 +49,7 @@ const Root = () => {
                       <Route path="/koszyk" element={<ShoppingCard />} />
                       <Route path="/moje-konto" element={<Account />} />
                       <Route path="/zamowienie" element={<Order />} />
+                      <Route path="/podsumowanie" element={<Summary />} />
                     </Routes>
                   </Wrapper>
                 </IsAuthProvider>
