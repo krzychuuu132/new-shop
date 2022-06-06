@@ -4,13 +4,14 @@ import MainTemplate from 'components/templates/MainTemplate/MainTemplate';
 import { Col, Container, Row } from 'styled-bootstrap-grid';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { ProductsSection } from 'views/Products/Products.styles';
 import { Button } from 'components/atoms/Button/Button.styles';
 import { ProductDetailsImage, ProductPrice, ProductsDetailsContent, Wrapper } from './ProductDetails.styles';
 import Breadcrumb from 'components/molecules/Breadcrumb/Breadcrumb';
 import Select from 'components/atoms/Select/Select';
 import { gql, useLazyQuery } from '@apollo/client';
 import { Error } from 'mongoose';
+import Loader from 'components/molecules/Loader/Loader';
+import Section from 'components/atoms/Section/Section';
 
 const ProductQuantity = [1, 2, 3, 4];
 
@@ -34,7 +35,7 @@ const GET_PRODUCT = gql`
 const ProductDetails = () => {
   const [productSize, setProductSize] = useState('XS');
   const [productQuantity, setProductQuantity] = useState(1);
-  const [productData, setProductData] = useState({});
+  const [productData, setProductData] = useState('');
 
   // QUERY PRODUCT DATA
   const [sendData, { loading }] = useLazyQuery(GET_PRODUCT);
@@ -101,13 +102,11 @@ const ProductDetails = () => {
     return tmp.textContent || tmp.innerText || '';
   };
 
-  console.log(productData);
-
   return (
     <MainTemplate>
       <Container>
         <Breadcrumb title={`Kup ${name} z dostawą za darmo!`} />
-        <ProductsSection>
+        <Section>
           {productData ? (
             <Wrapper>
               <Row alignItems="center">
@@ -115,7 +114,7 @@ const ProductDetails = () => {
                   {images && (
                     <ProductDetailsImage>
                       {images.map((image) => (
-                        <img src={image.src} />
+                        <img src={image.src} alt="Zdjęcie główne" />
                       ))}
                     </ProductDetailsImage>
                   )}
@@ -140,9 +139,9 @@ const ProductDetails = () => {
               </Row>
             </Wrapper>
           ) : (
-            loading
+            <Loader loading={loading} />
           )}
-        </ProductsSection>
+        </Section>
       </Container>
     </MainTemplate>
   );

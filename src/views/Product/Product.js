@@ -16,14 +16,12 @@ import {
 const Product = ({ product: { id, name, images } }) => {
   return (
     <Col md="6" lg="4" xl="3" key={id}>
-      <ProductWrapper>
+      <ProductWrapper to={`/produkty/${id}`}>
         <ProductFigure>
           <ProductPicture>
             <ProductImg src={images[0].src} alt={name} />
             <ProductLinkWrapper>
-              <ProductLink to={`/produkty/${id}`}>
-                przejdź do produktu
-              </ProductLink>
+              <ProductLink to={`/produkty/${id}`}>przejdź do produktu</ProductLink>
             </ProductLinkWrapper>
           </ProductPicture>
           <ProductFigCaption>
@@ -37,6 +35,10 @@ const Product = ({ product: { id, name, images } }) => {
   );
 };
 
-Product.propTypes = {};
+Product.propTypes = {
+  id: PropTypes.number,
+  name: PropTypes.string,
+  images: PropTypes.array,
+};
 
 export default Product;

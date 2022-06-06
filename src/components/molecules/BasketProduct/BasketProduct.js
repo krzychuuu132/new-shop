@@ -1,21 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import {
-  ProductContent,
-  ProductImg,
-  ProductQuantity,
-  ProductDetails,
-  ProductSum,
-  ProductTitle,
-  Wrapper,
-} from './BasketProduct.styles';
+import { ProductContent, ProductImg, ProductQuantity, ProductDetails, ProductSum, ProductTitle, Wrapper } from './BasketProduct.styles';
 
 import BasketIcon from 'assets/icons/basket.png';
 
-const BasketProduct = ({
-  basketProduct: { name, price, images, categories, quantity, id, size },
-}) => {
+const BasketProduct = ({ basketProduct: { name, price, images, categories, quantity, id, size }, deleteButton = true }) => {
   const dispatch = useDispatch();
 
   const handleRemoveProduct = (id) => {
@@ -34,9 +24,11 @@ const BasketProduct = ({
         </ProductTitle>
       </ProductContent>
       <ProductDetails>
-        <button onClick={() => handleRemoveProduct(id)}>
-          <img src={BasketIcon} alt="ikona kosza" />
-        </button>
+        {deleteButton && (
+          <button onClick={() => handleRemoveProduct(id)}>
+            <img src={BasketIcon} alt="ikona kosza" />
+          </button>
+        )}
 
         <ProductSum>
           <span>

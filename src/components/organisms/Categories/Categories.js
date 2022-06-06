@@ -3,6 +3,7 @@ import { gql, useQuery } from '@apollo/client';
 import PropTypes from 'prop-types';
 import Category from 'components/atoms/Category/Category';
 import { CategoriesNav } from './Categories.styles';
+import Loader from 'components/molecules/Loader/Loader';
 
 const GET_CATEGORIES = gql`
   query getCatgories {
@@ -16,7 +17,7 @@ const GET_CATEGORIES = gql`
 const Categories = (props) => {
   const { loading, error, data } = useQuery(GET_CATEGORIES);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loader loading={loading} />;
   if (error) return <p>{`Error! ${error.message}`}</p>;
 
   const { categories } = data;

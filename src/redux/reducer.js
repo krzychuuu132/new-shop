@@ -8,6 +8,14 @@ const getProducts = {
 const shopActivities = {
   basketProducts: [],
   price: 0,
+  orderDetails: {
+    delivery: 'Kurier – InPost, UPS, FedEx, DTS',
+    payment: 'Płatność online',
+    name: '',
+    street: '',
+    code: '',
+    town: '',
+  },
 };
 
 const productsReducer = (state = getProducts, action) => {
@@ -38,9 +46,7 @@ const shopActivitiesReducer = (state = shopActivities, action) => {
       return {
         ...state,
         basketProducts: state.basketProducts.map((product) =>
-          product.id === action.id
-            ? { ...product, quantity: product.quantity + action.quantity }
-            : product
+          product.id === action.id ? { ...product, quantity: product.quantity + action.quantity } : product
         ),
       };
     }
@@ -57,9 +63,7 @@ const shopActivitiesReducer = (state = shopActivities, action) => {
     case types.DELETE_FROM_SHOPPING_CARD: {
       return {
         ...state,
-        basketProducts: state.basketProducts.filter(
-          (basketProduct) => basketProduct.id !== action.id
-        ),
+        basketProducts: state.basketProducts.filter((basketProduct) => basketProduct.id !== action.id),
       };
     }
 
@@ -67,6 +71,15 @@ const shopActivitiesReducer = (state = shopActivities, action) => {
       return {
         ...state,
         basketProducts: [],
+      };
+    }
+    case types.CHANGE_ORDER_VALUES: {
+      const { name, value } = action;
+      const orderDetailsObjectCopy = Object.assign(state.orderDetails, {});
+      orderDetailsObjectCopy[name] = value;
+      return {
+        ...state,
+        orderDetails: orderDetailsObjectCopy,
       };
     }
     default:

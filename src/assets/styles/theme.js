@@ -6,7 +6,9 @@ export const theme = {
     borderColor: '#e8e7e7',
     black: '#161615',
     grayBckgr: '#f2f2f2',
+    gray: '#f1f1f1',
     white: '#fff',
+    loaderBckgr: 'rgb(232, 232, 232)',
   },
 
   transition: {

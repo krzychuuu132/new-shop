@@ -1,17 +1,18 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Section } from 'components/atoms/Section/Section.styles';
 import { Col, Container, Row } from 'styled-bootstrap-grid';
-import Input from 'components/atoms/Input/Input';
+import { Input } from 'components/atoms/Input/Input.styles';
 import Button from 'components/atoms/Button/Button';
 import DontHaveAccount from '../DontHaveAccount/DontHaveAccount';
 import Form from 'components/atoms/Form/Form';
 
 import { useForm } from 'react-hook-form';
 import ErrorMessage from 'components/atoms/ErrorMessage/ErrorMessage';
-import { gql, useLazyQuery, useMutation, useQuery } from '@apollo/client';
+import { gql, useLazyQuery } from '@apollo/client';
 import { AuthContext } from 'providers/IsAuthProvider';
 import { useNavigate } from 'react-router-dom';
+import { wait } from 'helpers/wait';
 
 const errorMessages = {
   nameRequired: 'Pole Imię jest wymagane',
@@ -40,7 +41,7 @@ const REGISTER_USER = gql`
 `;
 
 const LogInForm = ({ isLogIn }) => {
-  const [sendData, { loading, error, data: data2 }] = useLazyQuery(REGISTER_USER);
+  const [sendData, { loading, error }] = useLazyQuery(REGISTER_USER);
 
   let navigate = useNavigate();
 
@@ -61,12 +62,13 @@ const LogInForm = ({ isLogIn }) => {
     handleSubmit,
     formState: { errors },
     setError,
+    clearErrors,
   } = useForm();
 
-  const { addAuthData, jwt } = useContext(AuthContext);
+  const { addAuthData } = useContext(AuthContext);
 
   const onSubmit = async (data) => {
-    console.log('errors');
+    clearErrors();
     try {
       const { data: response } = await sendData({
         variables: {
@@ -74,8 +76,6 @@ const LogInForm = ({ isLogIn }) => {
           password: data.password,
         },
       });
-      console.log(response.login.error);
-
       if (response.login.error) {
         const { type, message } = response.login.error;
         setError(type, {
@@ -85,7 +85,7 @@ const LogInForm = ({ isLogIn }) => {
       } else {
         const { token, userId, tokenExpiration } = response.login;
         addAuthData(token, userId, tokenExpiration);
-        //await navigate('/');
+        await wait(() => navigate('/'), 1000);
       }
     } catch (err) {
       console.log(err);
@@ -95,25 +95,23 @@ const LogInForm = ({ isLogIn }) => {
   return (
     <Section>
       <Container>
-        <h1>Zaloguj się</h1>
+        <h1>Zaloguj się</h1>}
         <Row>
           <Col md={6}>
             <Form onSubmit={handleSubmit(onSubmit)}>
               <Input
                 type="text"
                 placeholder="Wprowadź adres e-mail"
-                ref={null}
                 {...register('email', {
                   required: emailRequired,
                   minLength: { value: 5, message: emailMinLength },
-                  maxLength: 20,
+                  maxLength: 40,
                 })}
               />
               <ErrorMessage message={errors.email} />
               <Input
                 type="password"
                 placeholder="Wprowadź hasło"
-                ref={null}
                 {...register('password', {
                   required: passwordRequired,
                   minLength: { value: 5, message: passwordMinLength },

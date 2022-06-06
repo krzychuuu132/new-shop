@@ -26,7 +26,6 @@ const ProductsDetailsContent = styled.div`
   height: 100%;
   display: grid;
   grid-template-rows: repeat(3, min-content);
-  grid-gap: 2rem 0;
   padding: 3rem;
   background-color: ${({ theme }) => theme.colors.grayBckgr};
   box-shadow: 0 3px 6px rgb(0 0 0 / 16%);

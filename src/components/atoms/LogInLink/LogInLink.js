@@ -1,9 +1,5 @@
 import React, { useContext } from 'react';
-import {
-  MenuListItem,
-  MenuListLink,
-  MenuListLinkIcon,
-} from 'components/organisms/Navbar/Navbar.styles';
+import { MenuListItem, MenuListLink, MenuListLinkIcon } from 'components/organisms/Navbar/Navbar.styles';
 import { ReactComponent as UserIcon } from 'assets/icons/user.svg';
 import { Wrapper } from './LogInLink.styles';
 import { AuthContext } from 'providers/IsAuthProvider';

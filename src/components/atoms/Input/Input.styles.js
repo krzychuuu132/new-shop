@@ -22,43 +22,6 @@ export const Input = styled.input`
   line-height: 2rem;
   font-size: 1.7rem;
 
-  &:not([type='checkbox']):focus {
-    & + label {
-      transform: translate(-4.5rem, -2.2rem) scale(0.6);
-    }
-  }
-  &[type='password']:focus {
-    & + label {
-      transform: translate(-3.5rem, -2.2rem) scale(0.6);
-    }
-  }
-  &[type='text']:focus {
-    & + label {
-      transform: translate(-3.5rem, -2.2rem) scale(0.6);
-    }
-  }
-
-  &:not(:placeholder-shown, [type='checkbox']),
-  textarea:not(:placeholder-shown) {
-    & + label {
-      transform: translate(-4.5rem, -2.2rem) scale(0.6);
-    }
-  }
-  &[type='password']:not(:placeholder-shown) {
-    & + label {
-      transform: translate(-3.5rem, -2.2rem) scale(0.6);
-    }
-  }
-  &[type='text']:not(:placeholder-shown) {
-    & + label {
-      transform: translate(-3.5rem, -2.2rem) scale(0.6);
-    }
-  }
-
-  &::placeholder {
-    opacity: 0;
-  }
-
   &[type='checkbox'] {
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeSpeed;
@@ -103,7 +66,6 @@ export const Input = styled.input`
 
     & + label {
       position: static;
-      margin-left: 3.5rem;
       pointer-events: all;
       cursor: pointer;
     }
@@ -116,11 +78,10 @@ export const InputWrapper = styled.div`
 
 export const CheckboxWrapper = styled.div`
   display: flex;
-  flex-direction: column;
   gap: 1rem 2rem;
+  margin-bottom: 0.5rem;
 
   label {
     margin-top: 0;
-    margin-left: 1rem;
   }
 `;
